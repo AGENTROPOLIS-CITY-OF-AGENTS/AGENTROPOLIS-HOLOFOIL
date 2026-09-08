@@ -17,6 +17,8 @@ const SKIP_DIRS = new Set([
   ".tanstack",
   ".grok",
   "artifacts",
+  "attachments",
+  "screenshots",
 ]);
 const SKIP_FILES = new Set(["package-lock.json"]);
 const TEXT_EXT = new Set([

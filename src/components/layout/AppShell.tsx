@@ -36,16 +36,25 @@ export function AppShell({ children }: { children: ReactNode }) {
       </a>
       <header className="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Link to="/" className="min-w-0 no-underline">
-            <p className="font-mono text-[10px] tracking-[0.28em] text-cyan uppercase">
-              AGENTROPOLIS
-            </p>
-            <p className="font-display text-xl leading-none tracking-tight text-fg">
-              HOLOFOIL
-            </p>
-            <p className="mt-1 text-[11px] text-muted">
-              Deterministic Material System
-            </p>
+          <Link to="/" className="flex min-w-0 items-center gap-3 no-underline">
+            <img
+              src="/holofoil-h.jpg"
+              alt=""
+              width={44}
+              height={44}
+              className="size-11 shrink-0 rounded-md object-contain"
+            />
+            <span className="min-w-0">
+              <p className="font-mono text-[10px] tracking-[0.28em] text-cyan uppercase">
+                AGENTROPOLIS
+              </p>
+              <p className="font-display text-xl leading-none tracking-tight text-fg">
+                HOLOFOIL
+              </p>
+              <p className="mt-1 text-[11px] text-muted">
+                Deterministic Material System
+              </p>
+            </span>
           </Link>
           <nav
             className="hidden items-center gap-1 lg:flex"

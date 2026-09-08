@@ -1,26 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { CreatureGlyph } from "@/components/holofoil/CreatureGlyph";
 import { HolofoilCard } from "@/components/holofoil/HolofoilCard";
-import { CREATURES } from "@/lib/holofoil/creatures";
+import { CREATURES, foilForCreature } from "@/lib/holofoil/creatures";
 import {
   applyFoilPreset,
   DEFAULT_MATERIAL,
   FOIL_TYPES,
-  type FoilType,
 } from "@/lib/holofoil/materials";
 import { HolofoilService } from "@/lib/holofoil/service";
 import type { Creature } from "@/lib/holofoil/types";
 
 export const Route = createFileRoute("/dex")({ component: CreatureDexPage });
-
-function foilFor(creature: Creature): FoilType {
-  if (creature.rarity === "legendary") return "obsidian-foil";
-  if (creature.rarity === "epic") return "rainbow-diffraction";
-  if (creature.type === "crystal") return "prism";
-  if (creature.type === "electric") return "neon-glitch";
-  if (creature.type === "metal") return "brushed-foil";
-  return "holographic";
-}
 
 function CreatureDexPage() {
   const [active, setActive] = useState(CREATURES[0]);
@@ -29,11 +20,12 @@ function CreatureDexPage() {
 
   const material = useMemo(
     () =>
-      applyFoilPreset(foilFor(active), {
+      applyFoilPreset(foilForCreature(active), {
         ...DEFAULT_MATERIAL,
-        glowColor: active.accent.startsWith("#") && active.accent.length === 7
-          ? active.accent
-          : DEFAULT_MATERIAL.glowColor,
+        glowColor:
+          active.accent.startsWith("#") && active.accent.length === 7
+            ? active.accent
+            : DEFAULT_MATERIAL.glowColor,
         seed: `${active.serialPrefix}-${active.dexNumber}`,
       }),
     [active],
@@ -118,13 +110,14 @@ function CreatureDexPage() {
           </dl>
           <p className="mt-5 text-sm leading-relaxed text-muted">{active.lore}</p>
           <p className="mt-3 font-mono text-[11px] text-cyan">
-            Material {foilFor(active)} · {FOIL_TYPES.length} lab types available
+            Material {foilForCreature(active)} · {FOIL_TYPES.length} lab types
+            available
           </p>
         </div>
       </div>
 
       <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((creature) => {
+        {filtered.map((creature: Creature) => {
           const selected = creature.slug === active.slug;
           return (
             <li key={creature.slug}>
@@ -150,24 +143,5 @@ function CreatureDexPage() {
         })}
       </ul>
     </main>
-  );
-}
-
-function CreatureGlyph({ creature }: { creature: Creature }) {
-  return (
-    <div className="relative flex h-full items-center justify-center">
-      <div
-        className="h-32 w-24 rounded-[40%_40%_32%_32%] border"
-        style={{
-          borderColor: creature.accent,
-          background: `linear-gradient(160deg, ${creature.colors[0]}, ${creature.colors[1] ?? creature.accent})`,
-          boxShadow: `0 0 40px color-mix(in oklab, ${creature.accent} 40%, transparent)`,
-        }}
-      />
-      <div
-        className="absolute h-6 w-10 rounded-full bg-bg/50"
-        style={{ top: "38%" }}
-      />
-    </div>
   );
 }

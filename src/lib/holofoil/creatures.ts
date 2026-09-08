@@ -1,3 +1,4 @@
+import type { FoilType } from "./materials";
 import type { Creature } from "./types";
 
 export const CREATURES: Creature[] = [
@@ -150,3 +151,13 @@ export const CREATURES: Creature[] = [
 export function creatureBySlug(slug: string): Creature | undefined {
   return CREATURES.find((c) => c.slug === slug);
 }
+
+export function foilForCreature(creature: Creature): FoilType {
+  if (creature.rarity === "legendary") return "obsidian-foil";
+  if (creature.rarity === "epic") return "rainbow-diffraction";
+  if (creature.type === "crystal") return "prism";
+  if (creature.type === "electric") return "neon-glitch";
+  if (creature.type === "metal") return "brushed-foil";
+  return "holographic";
+}
+
