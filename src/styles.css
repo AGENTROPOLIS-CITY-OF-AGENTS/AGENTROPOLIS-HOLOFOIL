@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", "Instrument Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-bg: #070709;
+  --color-bg-elevated: #101014;
+  --color-bg-subtle: #16161c;
+  --color-fg: #e8eef2;
+  --color-muted: #8b939c;
+  --color-subtle: #5c646c;
+  --color-cyan: #3ee0ff;
+  --color-cyan-dim: #1494ad;
+  --color-crimson: #c4454a;
+  --color-violet: #8b7cff;
+  --color-lime: #b6f25c;
+  --color-border: rgb(232 238 242 / 12%);
+  --color-border-strong: rgb(232 238 242 / 22%);
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+}
+
+@layer base {
+  html,
+  body,
+  #app {
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-cyan) 35%, transparent);
+    color: var(--color-fg);
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-cyan) #0b0b0e;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0b0e;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-cyan);
+  border-radius: 999px;
+  border: 2px solid #0b0b0e;
+}
+
+.foil-card {
+  --px: 0.5;
+  --py: 0.38;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --foil-speed: 0.45;
+  transform: perspective(1200px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform-style: preserve-3d;
+  will-change: transform;
+  touch-action: none;
+  transition: transform 180ms ease;
+}
+
+.foil-card.is-static {
+  transform: none;
+  transition: none;
+}
+
+.foil-sheen {
+  background:
+    radial-gradient(
+      120% 80% at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgb(255 255 255 / 0.42),
+      transparent 42%
+    ),
+    conic-gradient(
+      from calc(var(--px) * 220deg),
+      #3ee0ff,
+      #8b7cff,
+      #ff5ea8,
+      #ffd36a,
+      #b6f25c,
+      #3ee0ff
+    );
+  mix-blend-mode: color-dodge;
+  pointer-events: none;
+  animation: foil-drift calc(14s / var(--foil-speed, 0.45)) linear infinite;
+}
+
+.foil-sheen[data-type="brushed-foil"] {
+  background: repeating-linear-gradient(
+    calc(var(--px) * 40deg + 18deg),
+    rgb(255 255 255 / 0.04) 0 2px,
+    rgb(62 224 255 / 0.18) 3px 4px,
+    rgb(201 212 220 / 0.08) 6px 8px
+  );
+  mix-blend-mode: screen;
+}
+
+.foil-sheen[data-type="museum-glass"] {
+  background: linear-gradient(
+    118deg,
+    rgb(255 255 255 / 0.28),
+    transparent 38%,
+    rgb(62 224 255 / 0.12) 62%,
+    transparent
+  );
+  mix-blend-mode: screen;
+}
+
+.foil-sheen[data-type="obsidian-foil"] {
+  background:
+    radial-gradient(
+      70% 50% at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgb(62 224 255 / 0.35),
+      transparent 55%
+    ),
+    linear-gradient(90deg, transparent, rgb(139 124 255 / 0.2), transparent);
+  mix-blend-mode: screen;
+}
+
+.foil-sheen[data-type="neon-glitch"] {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 7px,
+      rgb(0 0 0 / 0.35) 8px 9px
+    ),
+    conic-gradient(from calc(var(--py) * 180deg), #3ee0ff, #ff3d7f, #3ee0ff);
+  mix-blend-mode: screen;
+}
+
+.foil-sheen[data-type="prism"] {
+  background: repeating-conic-gradient(
+    from calc(var(--px) * 80deg),
+    #3ee0ff 0 12deg,
+    #8b7cff 12deg 24deg,
+    #b6f25c 24deg 32deg,
+    #ffd36a 32deg 40deg
+  );
+  mix-blend-mode: color-dodge;
+}
+
+.foil-sheen[data-type="chromatic"] {
+  background:
+    radial-gradient(
+      90% 70% at calc(var(--px) * 100% - 8%) calc(var(--py) * 100%),
+      rgb(255 70 90 / 0.45),
+      transparent 42%
+    ),
+    radial-gradient(
+      90% 70% at calc(var(--px) * 100% + 8%) calc(var(--py) * 100%),
+      rgb(62 224 255 / 0.45),
+      transparent 42%
+    ),
+    linear-gradient(90deg, rgb(255 70 90 / 0.2), transparent, rgb(62 224 255 / 0.2));
+  mix-blend-mode: screen;
+}
+
+.foil-sheen[data-type="rainbow-diffraction"] {
+  background: repeating-linear-gradient(
+    calc(var(--px) * 50deg + 110deg),
+    #3ee0ff 0 6px,
+    #8b7cff 8px 14px,
+    #ff5ea8 16px 22px,
+    #ffd36a 24px 30px,
+    #b6f25c 32px 38px
+  );
+  mix-blend-mode: color-dodge;
+}
+
+.foil-sheen[data-type="serialized-collectible"] {
+  background:
+    radial-gradient(
+      60% 40% at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgb(182 242 92 / 0.35),
+      transparent 50%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 18px,
+      rgb(232 238 242 / 0.08) 19px 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 18px,
+      rgb(62 224 255 / 0.08) 19px 20px
+    );
+  mix-blend-mode: screen;
+}
+
+.foil-sheen[data-type="custom"] {
+  background:
+    radial-gradient(
+      80% 55% at calc(var(--px) * 100%) calc(var(--py) * 100%),
+      rgb(255 255 255 / 0.28),
+      transparent 48%
+    ),
+    conic-gradient(from calc(var(--py) * 160deg), #3ee0ff, #8b7cff, #3ee0ff);
+  mix-blend-mode: color-dodge;
+}
+
+@keyframes foil-drift {
+  0% {
+    transform: translate3d(-1.4%, -0.8%, 0);
+  }
+  50% {
+    transform: translate3d(1.4%, 0.8%, 0);
+  }
+  100% {
+    transform: translate3d(-1.4%, -0.8%, 0);
+  }
+}
+
+.foil-card.is-static .foil-sheen,
+.foil-card.is-static {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foil-card,
+  .foil-card.is-static {
+    transform: none;
+    transition: none;
+  }
+  .foil-sheen {
+    animation: none;
+  }
+}
