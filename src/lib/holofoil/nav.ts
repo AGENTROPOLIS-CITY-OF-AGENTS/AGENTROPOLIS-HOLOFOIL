@@ -1,5 +1,5 @@
 export const NAV_ITEMS = [
-  { to: "/", label: "Overview", hint: "Product" },
+  { to: "/", label: "Campus", hint: "3D" },
   { to: "/lab", label: "Material Lab", hint: "Foil" },
   { to: "/studio", label: "Card Studio", hint: "Author" },
   { to: "/dex", label: "Creature-Dex", hint: "Specimens" },

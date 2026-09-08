@@ -15,7 +15,7 @@ AGENTROPOLIS-54T owns security. Holofoil never mints, signs wallets, deploys con
 
 ## Surfaces
 
-- **Overview** — product landing, specimen card, system relationships
+- **Campus** — 3D Holofoil district; enter Material Lab, Card Studio, Creature-Dex, 3D Stage, Storyboard, SDK
 - **Material Lab** — foil type, intensity, refraction, glow, opacity, grain, fresnel, light, pointer, tilt, animation, reset, export
 - **Card Studio** — procedural sprites, pixel editor, trading-card foil wrap, metadata/pack export
 - **Creature-Dex** — twelve original specimens as foil presentation records

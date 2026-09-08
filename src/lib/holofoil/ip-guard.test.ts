@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { basename, extname, join } from "node:path";
 import test from "node:test";
+import { CAMPUS_BUILDINGS } from "./campus.ts";
 import { findBannedIp } from "./ip-guard.ts";
 import { NAV_ITEMS } from "./nav.ts";
 
@@ -61,6 +62,13 @@ test("source tree contains no banned IP", () => {
     if (hits.length) offenders.push(`${file}: ${hits.join(", ")}`);
   }
   assert.deepEqual(offenders, []);
+});
+
+test("campus buildings route into the navigation table", () => {
+  const paths = new Set(NAV_ITEMS.map((item) => item.to));
+  for (const building of CAMPUS_BUILDINGS) {
+    assert.equal(paths.has(building.to), true, building.id);
+  }
 });
 
 test("navigation routing table is complete", () => {
