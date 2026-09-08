@@ -19,8 +19,8 @@ function Home() {
           <img
             src="/holofoil-mark.jpg"
             alt="AGENTROPOLIS HOLOFOIL"
-            width={1200}
-            height={704}
+            width={1400}
+            height={675}
             className="mx-auto w-full max-w-3xl"
           />
           <p className="mx-auto mt-8 max-w-2xl text-center text-base leading-relaxed text-muted sm:text-lg">
