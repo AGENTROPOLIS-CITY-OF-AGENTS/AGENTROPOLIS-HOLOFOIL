@@ -19,12 +19,14 @@ import {
   summon,
   type ProofState,
 } from "@/lib/arc54/fixture";
+import { PROOF_RECORD, PLACEHOLDER, SUPPLY_CAP } from "@/lib/arc54/hood-terps";
 import { playTone } from "@/lib/holofoil/audio";
 
 export const Route = createFileRoute("/proof")({ component: ProofPage });
 
 function ProofPage() {
   const [state, setState] = useState<ProofState>(initialProof);
+  const [inspect, setInspect] = useState(false);
   const material = useMemo(() => materialFor(state.entity), [state.entity]);
   const receipt = useMemo(() => proofReceipt(state), [state]);
   const show3d = state.phase === "summon" || state.phase === "combat";
@@ -46,6 +48,9 @@ function ProofPage() {
         Canon is PLACEHOLDER.
       </p>
       <p className="mt-2 font-mono text-xs text-cyan">{state.entity.id}</p>
+      <p className="mt-1 font-mono text-[11px] text-muted">
+        DNA {PROOF_RECORD.hoodTerps.dna} · genetics {PROOF_RECORD.hoodTerps.genetics.type} · cap {SUPPLY_CAP} · 2048×2048 RGBA · hand-item rear→item→front
+      </p>
 
       <ol className="mt-4 flex flex-wrap gap-2 text-[11px] font-mono uppercase tracking-wider text-muted">
         {["card", "loadout", "encounter", "summon", "combat", "reward", "collection", "receipt"].map(
@@ -65,7 +70,7 @@ function ProofPage() {
           material={material}
           title={state.entity.identity.name}
           subtitle={reveal ? "REVEALED" : state.entity.identity.rarity}
-          serial={state.entity.id}
+          serial={inspect ? `${state.entity.id} · ${PLACEHOLDER}` : state.entity.id}
         >
           <ReliqMark revealed={reveal} />
         </HolofoilCard>
@@ -91,6 +96,16 @@ function ProofPage() {
           ) : null}
 
           <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              className={btn("ghost")}
+              onClick={() => {
+                setInspect((v) => !v);
+                playTone("beep");
+              }}
+            >
+              {inspect ? "Close inspect" : "Inspect"}
+            </button>
             {state.phase === "card" ? (
               <button type="button" className={btn()} onClick={() => act(addToLoadout(state), "confirm")}>
                 Add to loadout

@@ -48,7 +48,7 @@ export function sameCanonicalEntity(a: Arc54GameEntity, b: Arc54GameEntity): boo
   return a.id === b.id && a.projectId === b.projectId;
 }
 
-export const PROOF_ENTITY_ID = "hood-terps:proof-001";
+export const PROOF_ENTITY_ID = "hood-terps-proof-001";
 export const PROOF_PROJECT_ID = "hood-terps";
 
 export const PROOF_ENTITY: Arc54GameEntity = {
@@ -58,15 +58,11 @@ export const PROOF_ENTITY: Arc54GameEntity = {
   identity: {
     name: "HOOD TERPS PROOF ENTITY",
     faction: "PLACEHOLDER",
-    class: "collector",
-    rarity: "proof",
+    class: "PLACEHOLDER",
+    rarity: "PLACEHOLDER",
     loreRef: "canon_status=PLACEHOLDER",
   },
   gameplay: {
-    cost: 1,
-    attack: 12,
-    defense: 4,
-    health: 12,
     abilities: ["STRIKE"],
     tags: ["proof", "fixture"],
   },
@@ -89,7 +85,7 @@ export const PROOF_ENTITY: Arc54GameEntity = {
     rewardPool: "self",
   },
   provenance: {
-    originContractRef: "docs/PLAYABLE-SLICE-PROTOCOL.md",
+    originContractRef: "origin-engine/contracts/hood-terps-psp-profile.v1.json",
     creatorReceiptRef: "DATA SOURCE: FIXTURE",
     buildHash: "local-proof",
   },

@@ -1,5 +1,12 @@
 import { applyFoilPreset, canonicalizeMaterial, DEFAULT_MATERIAL, hashMaterial, type MaterialConfig } from "../holofoil/materials.ts";
 import { PROOF_ENTITY, type Arc54GameEntity } from "./game-entity.ts";
+import {
+  PROOF_RECORD,
+  holofoilSeedFromIdentity,
+  hoodTerpsHolofoilBinding,
+  identityChain,
+} from "./hood-terps.ts";
+import { assertHoodTerpsHolofoilBinding } from "../../../contracts/hood-terps-holofoil-binding.v1.ts";
 
 export const DATA_SOURCE = "FIXTURE" as const;
 
@@ -35,10 +42,11 @@ export interface ProofState {
 }
 
 export function materialFor(entity: Arc54GameEntity): MaterialConfig {
+  const seed = holofoilSeedFromIdentity(entity.id, PROOF_RECORD.hoodTerps.dna);
   return canonicalizeMaterial(
     applyFoilPreset("obsidian-foil", {
       ...DEFAULT_MATERIAL,
-      seed: entity.holofoil.deterministicSeed,
+      seed,
       glowColor: "#3ee0ff",
       pointerResponse: true,
       mobileTilt: true,
@@ -82,14 +90,15 @@ export function summon(state: ProofState): ProofState {
   return { ...state, phase: "summon" };
 }
 
+export const PROOF_STRIKE_DAMAGE = 1;
+
 export function strike(state: ProofState): ProofState {
   if (state.phase !== "summon" && state.phase !== "combat") return state;
-  const atk = state.entity.gameplay.attack ?? 12;
   const combat: CombatResult = {
     entityId: state.entity.id,
     action: "STRIKE",
-    damage: atk,
-    foeHpBefore: atk,
+    damage: PROOF_STRIKE_DAMAGE,
+    foeHpBefore: PROOF_STRIKE_DAMAGE,
     foeHpAfter: 0,
     outcome: "WIN",
     decidedBy: "ARCANA_FIXTURE",
@@ -130,26 +139,35 @@ export function identityContinuity(state: ProofState): string[] {
 
 export function proofReceipt(state: ProofState) {
   const material = materialFor(state.entity);
+  const binding = hoodTerpsHolofoilBinding();
+  assertHoodTerpsHolofoilBinding(binding);
+  const chain = identityChain();
   return {
     id: "hood-terps-proof-001",
     dataSource: DATA_SOURCE,
     wallet: "OFF",
     minting: "OFF",
     payments: "OFF",
-    origin_contract: "docs/PLAYABLE-SLICE-PROTOCOL.md",
+    origin_contract: "origin-engine/contracts/hood-terps-psp-profile.v1.json",
+    origin_psp_profile: "hood-terps-arc54-first-proof",
+    origin_runtime: "CONTRACT-ONLY",
     entity_id: state.entity.id,
     project_id: state.entity.projectId,
+    dna: PROOF_RECORD.hoodTerps.dna,
     canon_status: "PLACEHOLDER",
+    supply_cap: PROOF_RECORD.source.supplyCap,
     creator_package: state.entity.creator.productionPackageRef,
+    identity_chain: chain,
     arcana_binding: {
       decidedBy: "ARCANA_FIXTURE",
       combat: state.combat,
     },
     holofoil_binding: {
-      materialId: state.entity.holofoil.materialId,
-      seed: material.seed,
+      ...binding,
       foilHash: hashMaterial(material),
+      seed: material.seed,
     },
+    hoodTerps: PROOF_RECORD.hoodTerps,
     battle_result: state.combat,
     reward_result: state.phase === "reward" || state.collection.length ? "revealed" : null,
     collection_result: state.collection,

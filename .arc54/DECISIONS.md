@@ -10,13 +10,23 @@ DATE: 2026-09-09
 INVALIDATE_IF: ARCANA-54 ships a portable browser runtime that accepts the same entity id.
 
 ## DECISION
-Canonical entity id is `hood-terps:proof-001` with `canon_status = PLACEHOLDER`.
+Canonical entity id is `hood-terps-proof-001` (Gaming District fixture). DNA/genetics/traits/geometry coordinates remain PLACEHOLDER until HOOD TERPS exports a specific source record.
 
 OWNER: Shared identity.
-SOURCE: Implementation prompt; no HOOD TERPS canon retrieved.
-WHY: Do not invent lore.
+SOURCE: AGENTROPOLIS-GAMING-DISTRICT/fixtures/hood-terps/vertical-slice.v1.json + HOOD-TERPS README/export (no per-entity DNA in repo).
+WHY: Do not invent DNA, parentage, dominance, traits, or stats.
 DATE: 2026-09-09
-INVALIDATE_IF: Dock/Origin provides an authorized HOOD TERPS entity id.
+INVALIDATE_IF: HOOD-TERPS publishes a source DNA record for this entity.
+
+## DECISION
+Origin HOOD TERPS PSP profile exists and is bound. Origin runtime is CONTRACT-ONLY.
+
+OWNER: Origin Engine.
+SOURCE: AGENTROPOLIS-UTILITY-GRID/utilities/origin-engine/contracts/hood-terps-psp-profile.v1.json
+WHY: Profile found; no executable instantiate/verify in this slice.
+DATE: 2026-09-09
+INVALIDATE_IF: Origin ships a portable browser runtime for this profile.
+
 
 ## DECISION
 Wallet, mint, payments stay OFF for this slice.
