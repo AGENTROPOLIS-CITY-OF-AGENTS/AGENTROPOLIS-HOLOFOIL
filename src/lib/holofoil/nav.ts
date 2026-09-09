@@ -6,6 +6,7 @@ export const NAV_ITEMS = [
   { to: "/stage", label: "3D Stage", hint: "Pavilions" },
   { to: "/storyboard", label: "Storyboard", hint: "Beats" },
   { to: "/sdk", label: "SDK / Integration", hint: "Contracts" },
+  { to: "/proof", label: "Proof", hint: "HOOD TERPS" },
 ] as const;
 
 export type NavPath = (typeof NAV_ITEMS)[number]["to"];
