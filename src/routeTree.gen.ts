@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DexRouteImport } from './routes/dex'
 import { Route as LabRouteImport } from './routes/lab'
+import { Route as ProofRouteImport } from './routes/proof'
 import { Route as SdkRouteImport } from './routes/sdk'
 import { Route as StageRouteImport } from './routes/stage'
 import { Route as StoryboardRouteImport } from './routes/storyboard'
@@ -36,6 +37,11 @@ const DexRoute = DexRouteImport.update({
 const LabRoute = LabRouteImport.update({
   id: '/lab',
   path: '/lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProofRoute = ProofRouteImport.update({
+  id: '/proof',
+  path: '/proof',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SdkRoute = SdkRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dex': typeof DexRoute
   '/lab': typeof LabRoute
+  '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dex': typeof DexRoute
   '/lab': typeof LabRoute
+  '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dex': typeof DexRoute
   '/lab': typeof LabRoute
+  '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dex'
     | '/lab'
+    | '/proof'
     | '/sdk'
     | '/stage'
     | '/storyboard'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dex'
     | '/lab'
+    | '/proof'
     | '/sdk'
     | '/stage'
     | '/storyboard'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dex'
     | '/lab'
+    | '/proof'
     | '/sdk'
     | '/stage'
     | '/storyboard'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DexRoute: typeof DexRoute
   LabRoute: typeof LabRoute
+  ProofRoute: typeof ProofRoute
   SdkRoute: typeof SdkRoute
   StageRoute: typeof StageRoute
   StoryboardRoute: typeof StoryboardRoute
@@ -221,6 +234,13 @@ declare module '@tanstack/react-router' {
       path: '/lab'
       fullPath: '/lab'
       preLoaderRoute: typeof LabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proof': {
+      id: '/proof'
+      path: '/proof'
+      fullPath: '/proof'
+      preLoaderRoute: typeof ProofRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sdk': {
@@ -300,6 +320,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DexRoute: DexRoute,
   LabRoute: LabRoute,
+  ProofRoute: ProofRoute,
   SdkRoute: SdkRoute,
   StageRoute: StageRoute,
   StoryboardRoute: StoryboardRoute,
