@@ -1,0 +1,60 @@
+{
+  "consumed": true,
+  "source_repo": "AGENTROPOLIS-CITY-OF-AGENTS/HOOD-TERPS",
+  "source_commit": "2fa66859efdd7b019b8e96107a7c916d8dc6f728",
+  "source_freeze": "41ab844178f21238b7152a70d3f6e726d60e6d92",
+  "handoff_ref": "fixtures/arcana54/HANDOFF.json",
+  "entity_id": "hood-terps:0001",
+  "dna": "5a81bb1a3f1b1f1ea14f3c40998c272152fe916b0bea4adae81811c7a377f521",
+  "dna_spec": {
+    "algorithm": "hood-terps.renderer.v1",
+    "version": "1",
+    "seed": "hood-terps:0001",
+    "edition": 1,
+    "nonce": 0
+  },
+  "genetics": {
+    "type": "HYBRID",
+    "parentage": null,
+    "dominance": null
+  },
+  "traits_status": "UNRESOLVED",
+  "geometry": {
+    "status": "PENDING_ASSETS",
+    "template": "hood-terps.geometry.v1.2",
+    "receipt": "geom:hood-terps:0001:pending",
+    "anchors": [
+      "head_center",
+      "left_eye",
+      "right_eye",
+      "mask_center",
+      "left_shoulder",
+      "right_shoulder",
+      "hand_grip",
+      "rear_finger_contact",
+      "front_finger_contact",
+      "smoke_origin",
+      "necklace_center"
+    ],
+    "passed": false
+  },
+  "replaced_placeholders": {
+    "entity_id": "hood-terps-proof-001",
+    "dna": "HT.v1.INDICA.5e710715.71be504a",
+    "genetics": "INDICA",
+    "geometry": "null/empty"
+  },
+  "holofoil": {
+    "entityId": "hood-terps:0001",
+    "dna": "5a81bb1a3f1b1f1ea14f3c40998c272152fe916b0bea4adae81811c7a377f521",
+    "materialId": "hf_51721e36",
+    "deterministicSeed": "hood-terps:0001|5a81bb1a3f1b1f1ea14f3c40998c272152fe916b0bea4adae81811c7a377f521",
+    "seedSource": "ENTITY_ID_AND_DNA"
+  },
+  "art": "UNPRODUCED",
+  "financial": {
+    "wallet": false,
+    "mint": false,
+    "payment": false
+  }
+}
