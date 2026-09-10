@@ -81,6 +81,5 @@ test("navigation routing table is complete", () => {
     "/stage",
     "/storyboard",
     "/sdk",
-    "/proof",
   ]);
 });

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import JSZip from "jszip";
 import { useMemo, useState } from "react";
+import { MemberWorkspace } from "@/components/access/MemberWorkspace";
 import { HolofoilCard } from "@/components/holofoil/HolofoilCard";
 import { PixelEditor } from "@/components/holofoil/PixelEditor";
 import { PixelGrid } from "@/components/holofoil/PixelGrid";
@@ -20,7 +21,15 @@ import {
 } from "@/lib/holofoil/procedural";
 import type { PixelSprite, SpriteStyle } from "@/lib/holofoil/types";
 
-export const Route = createFileRoute("/studio")({ component: CardStudioPage });
+export const Route = createFileRoute("/studio")({ component: StudioRoute });
+
+function StudioRoute() {
+  return (
+    <MemberWorkspace capability="holofoil.card-studio.use" title="Card Studio">
+      <CardStudioPage />
+    </MemberWorkspace>
+  );
+}
 
 const STYLES: SpriteStyle[] = [
   "retro-classic",

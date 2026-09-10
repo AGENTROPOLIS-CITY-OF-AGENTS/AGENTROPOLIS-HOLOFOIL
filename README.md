@@ -22,7 +22,7 @@ AGENTROPOLIS-54T owns security. Holofoil never mints, signs wallets, deploys con
 - **3D Stage** — convention pavilions as material rooms (serialized vault replaces the retired inscription booth)
 - **Storyboard** — local deterministic reveal beats
 - **SDK / Integration** — typed adapter contracts
-- **Proof** — HOOD TERPS first playable slice. One canonical entity through card → loadout → summon → combat → reveal → collection. ARCANA fixture decides combat. DATA SOURCE: FIXTURE. Wallet off.
+- Internal QA: `/internal/proofs/hood-terps` (INTERNAL entitlement only; not in public nav)
 
 ## Material schema
 

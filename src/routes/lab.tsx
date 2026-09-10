@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { MemberWorkspace } from "@/components/access/MemberWorkspace";
 import { HolofoilCard } from "@/components/holofoil/HolofoilCard";
 import { playTone } from "@/lib/holofoil/audio";
 import {
@@ -14,7 +15,15 @@ import {
   validateMaterialConfig,
 } from "@/lib/holofoil/materials";
 
-export const Route = createFileRoute("/lab")({ component: MaterialLabPage });
+export const Route = createFileRoute("/lab")({ component: LabRoute });
+
+function LabRoute() {
+  return (
+    <MemberWorkspace capability="holofoil.material.use" title="Material Lab">
+      <MaterialLabPage />
+    </MemberWorkspace>
+  );
+}
 
 function MaterialLabPage() {
   const [material, setMaterial] = useState<MaterialConfig>(DEFAULT_MATERIAL);

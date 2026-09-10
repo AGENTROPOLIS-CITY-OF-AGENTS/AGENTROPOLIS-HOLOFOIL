@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DexRouteImport } from './routes/dex'
 import { Route as LabRouteImport } from './routes/lab'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProofRouteImport } from './routes/proof'
 import { Route as SdkRouteImport } from './routes/sdk'
 import { Route as StageRouteImport } from './routes/stage'
@@ -21,6 +22,7 @@ import { Route as ApiGenerateRouteImport } from './routes/api/generate'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiStoryboardRouteImport } from './routes/api/storyboard'
 import { Route as ApiHolofoilRegisterRouteImport } from './routes/api/holofoil/register'
+import { Route as InternalProofsHoodTerpsRouteImport } from './routes/internal/proofs/hood-terps'
 import { Route as ApiHolofoilAssetIdTelemetryRouteImport } from './routes/api/holofoil/$assetId.telemetry'
 import { Route as ApiHolofoilHallHallIdRouteImport } from './routes/api/holofoil/hall.$hallId'
 
@@ -37,6 +39,11 @@ const DexRoute = DexRouteImport.update({
 const LabRoute = LabRouteImport.update({
   id: '/lab',
   path: '/lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProofRoute = ProofRouteImport.update({
@@ -84,6 +91,11 @@ const ApiHolofoilRegisterRoute = ApiHolofoilRegisterRouteImport.update({
   path: '/api/holofoil/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InternalProofsHoodTerpsRoute = InternalProofsHoodTerpsRouteImport.update({
+  id: '/internal/proofs/hood-terps',
+  path: '/internal/proofs/hood-terps',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiHolofoilAssetIdTelemetryRoute =
   ApiHolofoilAssetIdTelemetryRouteImport.update({
     id: '/api/holofoil/$assetId/telemetry',
@@ -100,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dex': typeof DexRoute
   '/lab': typeof LabRoute
+  '/login': typeof LoginRoute
   '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
   '/stage': typeof StageRoute
@@ -109,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/storyboard': typeof ApiStoryboardRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
+  '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
   '/api/holofoil/hall/$hallId': typeof ApiHolofoilHallHallIdRoute
 }
@@ -116,6 +130,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dex': typeof DexRoute
   '/lab': typeof LabRoute
+  '/login': typeof LoginRoute
   '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
   '/stage': typeof StageRoute
@@ -125,6 +140,7 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/storyboard': typeof ApiStoryboardRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
+  '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
   '/api/holofoil/hall/$hallId': typeof ApiHolofoilHallHallIdRoute
 }
@@ -133,6 +149,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dex': typeof DexRoute
   '/lab': typeof LabRoute
+  '/login': typeof LoginRoute
   '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
   '/stage': typeof StageRoute
@@ -142,6 +159,7 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/storyboard': typeof ApiStoryboardRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
+  '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
   '/api/holofoil/hall/$hallId': typeof ApiHolofoilHallHallIdRoute
 }
@@ -151,6 +169,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dex'
     | '/lab'
+    | '/login'
     | '/proof'
     | '/sdk'
     | '/stage'
@@ -160,6 +179,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/storyboard'
     | '/api/holofoil/register'
+    | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
     | '/api/holofoil/hall/$hallId'
   fileRoutesByTo: FileRoutesByTo
@@ -167,6 +187,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dex'
     | '/lab'
+    | '/login'
     | '/proof'
     | '/sdk'
     | '/stage'
@@ -176,6 +197,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/storyboard'
     | '/api/holofoil/register'
+    | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
     | '/api/holofoil/hall/$hallId'
   id:
@@ -183,6 +205,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dex'
     | '/lab'
+    | '/login'
     | '/proof'
     | '/sdk'
     | '/stage'
@@ -192,6 +215,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/storyboard'
     | '/api/holofoil/register'
+    | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
     | '/api/holofoil/hall/$hallId'
   fileRoutesById: FileRoutesById
@@ -200,6 +224,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DexRoute: typeof DexRoute
   LabRoute: typeof LabRoute
+  LoginRoute: typeof LoginRoute
   ProofRoute: typeof ProofRoute
   SdkRoute: typeof SdkRoute
   StageRoute: typeof StageRoute
@@ -209,6 +234,7 @@ export interface RootRouteChildren {
   ApiHealthRoute: typeof ApiHealthRoute
   ApiStoryboardRoute: typeof ApiStoryboardRoute
   ApiHolofoilRegisterRoute: typeof ApiHolofoilRegisterRoute
+  InternalProofsHoodTerpsRoute: typeof InternalProofsHoodTerpsRoute
   ApiHolofoilAssetIdTelemetryRoute: typeof ApiHolofoilAssetIdTelemetryRoute
   ApiHolofoilHallHallIdRoute: typeof ApiHolofoilHallHallIdRoute
 }
@@ -234,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/lab'
       fullPath: '/lab'
       preLoaderRoute: typeof LabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proof': {
@@ -299,6 +332,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiHolofoilRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/internal/proofs/hood-terps': {
+      id: '/internal/proofs/hood-terps'
+      path: '/internal/proofs/hood-terps'
+      fullPath: '/internal/proofs/hood-terps'
+      preLoaderRoute: typeof InternalProofsHoodTerpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/holofoil/$assetId/telemetry': {
       id: '/api/holofoil/$assetId/telemetry'
       path: '/api/holofoil/$assetId/telemetry'
@@ -320,6 +360,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DexRoute: DexRoute,
   LabRoute: LabRoute,
+  LoginRoute: LoginRoute,
   ProofRoute: ProofRoute,
   SdkRoute: SdkRoute,
   StageRoute: StageRoute,
@@ -329,6 +370,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHealthRoute: ApiHealthRoute,
   ApiStoryboardRoute: ApiStoryboardRoute,
   ApiHolofoilRegisterRoute: ApiHolofoilRegisterRoute,
+  InternalProofsHoodTerpsRoute: InternalProofsHoodTerpsRoute,
   ApiHolofoilAssetIdTelemetryRoute: ApiHolofoilAssetIdTelemetryRoute,
   ApiHolofoilHallHallIdRoute: ApiHolofoilHallHallIdRoute,
 }

@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
+import { SignedOut, UserButton } from "@/lib/auth/gates";
 import { unlockAudio } from "@/lib/holofoil/audio";
 import { prefersReducedMotion } from "@/lib/holofoil/motion";
 import { NAV_ITEMS } from "@/lib/holofoil/nav";
@@ -79,6 +80,15 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </Link>
               );
             })}
+            <SignedOut>
+              <Link
+                to="/login"
+                className="ml-2 rounded-full bg-cyan px-3 py-2 text-sm font-medium text-bg no-underline"
+              >
+                Sign in
+              </Link>
+            </SignedOut>
+            <UserButton />
           </nav>
           <button
             type="button"
@@ -111,6 +121,16 @@ export function AppShell({ children }: { children: ReactNode }) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <SignedOut>
+                  <Link
+                    to="/login"
+                    className="flex min-h-11 items-center rounded-md px-3 text-sm text-cyan no-underline"
+                  >
+                    Sign in
+                  </Link>
+                </SignedOut>
+              </li>
             </ul>
           </nav>
         ) : null}

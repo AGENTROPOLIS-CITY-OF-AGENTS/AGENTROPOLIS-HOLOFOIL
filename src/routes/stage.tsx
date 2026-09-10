@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { HolofoilCard } from "@/components/holofoil/HolofoilCard";
+import { MemberWorkspace } from "@/components/access/MemberWorkspace";
 import { DistrictBuilding, Plaza, SceneLights, Skyline, TreePatch } from "@/components/holofoil/scene/WorldKit";
 import { WorkAgents } from "@/components/holofoil/scene/WorkAgents";
 import { playTone } from "@/lib/holofoil/audio";
@@ -15,7 +16,15 @@ import {
 import { prefersReducedMotion } from "@/lib/holofoil/motion";
 import { MATERIAL_PAVILIONS } from "@/lib/holofoil/pavilions";
 
-export const Route = createFileRoute("/stage")({ component: StagePage });
+export const Route = createFileRoute("/stage")({ component: StageRoute });
+
+function StageRoute() {
+  return (
+    <MemberWorkspace capability="holofoil.3d-stage.use" title="3D Stage">
+      <StagePage />
+    </MemberWorkspace>
+  );
+}
 
 const PAVILION_HOMES = MATERIAL_PAVILIONS.map((item, index) => {
   const angle = (index / MATERIAL_PAVILIONS.length) * Math.PI * 2 - Math.PI / 2;
