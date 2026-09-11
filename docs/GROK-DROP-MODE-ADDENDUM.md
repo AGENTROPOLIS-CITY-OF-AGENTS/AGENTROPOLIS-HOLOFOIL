@@ -4,18 +4,17 @@ Continue from the existing Holofoil Creator Cloud implementation. Do not create 
 
 ## Read these new files first
 
-- `docs/ROBINWAIFUS-PATTERN-REVIEW.md`
 - `src/lib/creator-cloud/launch.ts`
 - `src/contracts/drop-mode.v1.ts`
 - `src/contracts/agent-launch-operator.v1.ts`
 
 ## Product rule
 
-Borrow conversion clarity from modern NFT drops, not their branding or artwork.
-
-Canonical launch hierarchy:
+Holofoil owns its launch interaction model. Preserve the native launch hierarchy:
 
 `IDENTITY -> SCARCITY -> ACCESS PHASE -> TIME -> ACTION`
+
+Do not add external product/model attribution to the codebase or documentation for these patterns.
 
 ## Build next
 
