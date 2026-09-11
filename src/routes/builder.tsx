@@ -87,7 +87,7 @@ function BuilderPage() {
   };
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+    <main className="mx-auto max-w-7xl px-3 pb-28 pt-5 sm:px-6 sm:py-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-lime">
@@ -468,42 +468,6 @@ function BuilderPage() {
               ) : null}
             </div>
           ) : null}
-
-          <div className="mt-8 flex justify-between">
-            <button
-              type="button"
-              disabled={state.step === 0}
-              onClick={() => commit({ ...state, step: Math.max(0, state.step - 1) })}
-              className="min-h-11 rounded-full border border-border px-5 text-sm disabled:opacity-30"
-            >
-              Back
-            </button>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                disabled={!history.length}
-                onClick={() => {
-                  const prev = history[history.length - 1];
-                  if (!prev) return;
-                  setHistory((h) => h.slice(0, -1));
-                  setState(prev);
-                }}
-                className="min-h-11 rounded-full border border-border px-4 text-sm disabled:opacity-30"
-              >
-                Undo
-              </button>
-              <button
-                type="button"
-                disabled={state.step === STEPS.length - 1}
-                onClick={() =>
-                  commit({ ...state, step: Math.min(STEPS.length - 1, state.step + 1) })
-                }
-                className="min-h-11 rounded-full bg-cyan px-5 text-sm font-medium text-bg disabled:opacity-30"
-              >
-                Continue
-              </button>
-            </div>
-          </div>
         </div>
 
         <aside className="rounded-2xl border border-lime/30 bg-bg-elevated p-5">
@@ -544,6 +508,41 @@ function BuilderPage() {
           ) : null}
         </aside>
       </section>
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-bg/95 px-3 py-3 backdrop-blur-md [padding-bottom:max(0.75rem,env(safe-area-inset-bottom))] sm:px-6">
+        <div className="mx-auto flex max-w-7xl gap-2">
+          <button
+            type="button"
+            disabled={state.step === 0}
+            onClick={() => commit({ ...state, step: Math.max(0, state.step - 1) })}
+            className="min-h-12 flex-1 rounded-full border border-border px-4 text-sm disabled:opacity-30 sm:flex-none sm:px-5"
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            disabled={!history.length}
+            onClick={() => {
+              const prev = history[history.length - 1];
+              if (!prev) return;
+              setHistory((h) => h.slice(0, -1));
+              setState(prev);
+            }}
+            className="min-h-12 rounded-full border border-border px-4 text-sm disabled:opacity-30"
+          >
+            Undo
+          </button>
+          <button
+            type="button"
+            disabled={state.step === STEPS.length - 1}
+            onClick={() =>
+              commit({ ...state, step: Math.min(STEPS.length - 1, state.step + 1) })
+            }
+            className="min-h-12 flex-[1.4] rounded-full bg-cyan px-4 text-sm font-medium text-bg disabled:opacity-30 sm:flex-none sm:px-5"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
     </main>
   );
 }

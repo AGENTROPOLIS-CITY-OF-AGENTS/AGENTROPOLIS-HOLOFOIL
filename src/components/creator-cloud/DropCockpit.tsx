@@ -77,17 +77,17 @@ export function DropCockpit({
       ) : null}
       <div className="mt-4 flex flex-wrap gap-2">
         {drop.primaryAction === "NOTIFY_ME" ? (
-          <button type="button" className="min-h-11 rounded-full border border-cyan px-5 text-cyan">
+          <button type="button" className="min-h-12 w-full rounded-full border border-cyan px-5 text-cyan sm:w-auto">
             Notify me
           </button>
         ) : null}
         {drop.primaryAction === "COLLECT" ? (
-          <button type="button" className="min-h-11 rounded-full bg-lime px-5 text-bg">
+          <button type="button" className="min-h-12 w-full rounded-full bg-lime px-5 text-bg sm:w-auto">
             Collect
           </button>
         ) : null}
         {drop.primaryAction === "VIEW_COLLECTION" ? (
-          <button type="button" className="min-h-11 rounded-full border border-border px-5">
+          <button type="button" className="min-h-12 w-full rounded-full border border-border px-5 sm:w-auto">
             View collection
           </button>
         ) : null}

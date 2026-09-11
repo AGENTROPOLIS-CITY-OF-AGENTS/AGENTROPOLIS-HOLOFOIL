@@ -61,13 +61,13 @@ export function MixerWorkspace({
                   return (
                     <div
                       key={layer.id}
-                      className={`flex min-h-11 items-center gap-1 rounded-lg border px-2 ${
+                      className={`flex min-h-11 min-w-0 items-center gap-1 rounded-lg border px-2 ${
                         active ? "border-cyan/40 bg-bg" : "border-border"
                       }`}
                     >
                       <button
                         type="button"
-                        className="min-h-11 flex-1 truncate text-left text-sm"
+                        className="min-h-11 min-w-0 flex-1 truncate text-left text-sm"
                         onClick={() => onChange(selectOption(state, layer.group, layer.id))}
                       >
                         {layer.value}

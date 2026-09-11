@@ -37,18 +37,34 @@
 }
 
 @layer base {
+  :root {
+    --hf-header: 5.75rem;
+  }
+  @media (min-width: 640px) {
+    :root {
+      --hf-header: 6.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    :root {
+      --hf-header: 7.25rem;
+    }
+  }
+
   html,
   body,
   #app {
     min-height: 100%;
     background: var(--color-bg);
     color: var(--color-fg);
+    overflow-x: clip;
   }
 
   body {
     font-family: var(--font-sans);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   button:not(:disabled),

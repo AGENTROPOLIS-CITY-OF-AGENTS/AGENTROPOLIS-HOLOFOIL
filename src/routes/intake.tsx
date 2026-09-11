@@ -12,9 +12,9 @@ function IntakePage() {
   if (!user) return <RedirectToSignIn to="/login" />;
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+    <main className="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-8">
       <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan">New project</p>
-      <h1 className="mt-2 font-display text-4xl tracking-tight">Upload it. Tell NEURO. Or build it one step at a time.</h1>
+      <h1 className="mt-2 font-display text-3xl tracking-tight sm:text-4xl">Upload it. Tell NEURO. Or build it one step at a time.</h1>
       <p className="mt-3 max-w-2xl text-sm text-muted">
         You do not need a perfect folder. Holofoil inspects what you already have and only asks when something is missing,
         conflicted, or founder-only.
@@ -33,9 +33,10 @@ function IntakePage() {
           <p className="mt-2 text-sm text-muted">One decision at a time. Not a form.</p>
         </Link>
       </div>
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
       <button
         type="button"
-        className="mt-6 text-sm text-cyan"
+        className="min-h-11 text-left text-sm text-cyan"
         onClick={() => {
           persistProject(hoodTerpsSeed());
           window.location.href = "/project";
@@ -45,11 +46,12 @@ function IntakePage() {
       </button>
       <button
         type="button"
-        className="ml-4 text-sm text-muted"
+        className="min-h-11 text-left text-sm text-muted"
         onClick={() => persistProject(emptyProject("GUIDED"))}
       >
         Reset draft
       </button>
+      </div>
     </main>
   );
 }

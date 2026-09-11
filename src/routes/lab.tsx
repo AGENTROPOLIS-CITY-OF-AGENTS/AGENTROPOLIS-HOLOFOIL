@@ -54,7 +54,7 @@ function MaterialLabPage() {
   };
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <main className="mx-auto max-w-7xl px-3 py-6 sm:px-6 sm:py-8">
       <header className="mb-8 max-w-2xl">
         <p className="font-mono text-[11px] tracking-[0.24em] text-cyan uppercase">
           Material Lab

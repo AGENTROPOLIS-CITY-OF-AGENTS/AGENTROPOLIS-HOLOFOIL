@@ -46,7 +46,7 @@ function GuidedIntake() {
                 key={choice.id}
                 type="button"
                 onClick={() => choose(choice.id)}
-                className="min-h-14 rounded-xl border border-border px-4 text-left hover:border-lime"
+                className="min-h-14 w-full rounded-xl border border-border px-4 text-left hover:border-lime"
               >
                 {choice.label}
               </button>

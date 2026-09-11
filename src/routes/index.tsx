@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
   return (
-    <main className="h-[calc(100dvh-8.25rem)] min-h-[540px]">
+    <main className="h-[calc(100svh-var(--hf-header))] min-h-0 overflow-hidden">
       <HolofoilCampus />
     </main>
   );

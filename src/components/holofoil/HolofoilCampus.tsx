@@ -55,7 +55,7 @@ export function HolofoilCampus() {
   };
 
   return (
-    <div ref={hostRef} className="relative h-full min-h-[540px] bg-bg">
+    <div ref={hostRef} className="relative h-full min-h-0 overflow-hidden bg-bg">
       {visible ? (
         <Canvas
           className="h-full w-full touch-none"
@@ -130,7 +130,7 @@ export function HolofoilCampus() {
       )}
 
       <div className="pointer-events-none absolute inset-0">
-        <div className="pointer-events-auto absolute top-3 left-3 right-3 flex gap-2 overflow-x-auto md:hidden">
+        <div className="pointer-events-auto absolute top-2 right-2 left-2 flex gap-2 overflow-x-auto pb-1 [-webkit-overflow-scrolling:touch] md:hidden">
           {CAMPUS_BUILDINGS.filter((b) => b.id !== "core").map((building) => (
             <button
               key={building.id}
@@ -190,26 +190,26 @@ export function HolofoilCampus() {
           </p>
         </div>
 
-        <div className="pointer-events-auto absolute bottom-3 left-3 right-3 md:right-72">
-          <div className="flex flex-col gap-3 rounded-[18px] border border-border bg-bg/85 p-4 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
-            <div>
+        <div className="pointer-events-auto absolute right-2 left-2 bottom-[max(0.5rem,env(safe-area-inset-bottom))] md:right-72">
+          <div className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-bg/90 p-2.5 backdrop-blur-md sm:p-4">
+            <div className="min-w-0">
               <p className="font-mono text-[10px] tracking-[0.2em] text-cyan uppercase">
                 Selection
               </p>
-              <p className="mt-1 font-display text-xl text-fg">{selected.name}</p>
-              <p className="text-sm text-muted">{selected.hint}</p>
+              <p className="truncate font-display text-base text-fg sm:text-xl">{selected.name}</p>
             </div>
             {selected.to === "/" ? (
-              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-lime">
+              <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-lime">
                 You are here
               </p>
             ) : (
               <button
                 type="button"
                 onClick={() => enter(selected)}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-cyan px-5 text-sm font-medium text-bg"
+                aria-label={`Enter ${selected.name}`}
+                className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full bg-cyan px-4 text-sm font-medium text-bg sm:min-h-12 sm:px-5"
               >
-                Enter {selected.name}
+                Enter
               </button>
             )}
           </div>

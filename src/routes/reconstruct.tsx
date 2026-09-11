@@ -40,7 +40,7 @@ function ReconstructPage() {
       </p>
       <button
         type="button"
-        className="mt-6 min-h-12 rounded-full bg-lime px-6 text-bg"
+        className="mt-6 min-h-12 w-full rounded-full bg-lime px-6 text-bg sm:w-auto"
         onClick={() => setIntent(true)}
       >
         Rebuild my assets

@@ -36,23 +36,23 @@ export function AppShell({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <header className="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Link to="/" className="flex min-w-0 items-center gap-3 no-underline">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-2 sm:gap-4 sm:px-6 sm:py-3">
+          <Link to="/" className="flex min-w-0 items-center gap-2 no-underline sm:gap-3">
             <img
               src="/holofoil-h.jpg"
               alt=""
               width={44}
               height={44}
-              className="size-11 shrink-0 rounded-md object-contain"
+              className="size-9 shrink-0 rounded-md object-contain sm:size-11"
             />
             <span className="min-w-0">
-              <p className="font-mono text-[10px] tracking-[0.28em] text-cyan uppercase">
+              <p className="font-mono text-[9px] tracking-[0.22em] text-cyan uppercase sm:text-[10px] sm:tracking-[0.28em]">
                 AGENTROPOLIS
               </p>
-              <p className="font-display text-xl leading-none tracking-tight text-fg">
+              <p className="font-display text-lg leading-none tracking-tight text-fg sm:text-xl">
                 HOLOFOIL
               </p>
-              <p className="mt-1 text-[11px] text-muted">
+              <p className="mt-1 hidden text-[11px] text-muted sm:block">
                 Deterministic Material System
               </p>
             </span>
@@ -135,14 +135,14 @@ export function AppShell({ children }: { children: ReactNode }) {
           </nav>
         ) : null}
         <div className="border-t border-border bg-bg-elevated/80">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-5 gap-y-1 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted sm:px-6">
-            <span className="inline-flex items-center gap-2 text-lime">
+          <div className="mx-auto flex max-w-7xl items-center gap-3 overflow-hidden px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted sm:gap-5 sm:px-6 sm:tracking-[0.16em]">
+            <span className="inline-flex shrink-0 items-center gap-2 text-lime">
               <span className="size-1.5 rounded-full bg-lime" aria-hidden />
               Operational
             </span>
-            <span>Materials · deterministic</span>
-            <span>{reduced ? "Reduced motion · static foil" : "Pointer / tilt live"}</span>
-            <span className="ml-auto text-cyan">Web2 First · Web3 Optional · Agent Ready</span>
+            <span className="hidden sm:inline">Materials · deterministic</span>
+            <span className="hidden md:inline">{reduced ? "Reduced motion · static foil" : "Pointer / tilt live"}</span>
+            <span className="ml-auto truncate text-cyan">Web2 first · Web3 optional</span>
           </div>
         </div>
       </header>

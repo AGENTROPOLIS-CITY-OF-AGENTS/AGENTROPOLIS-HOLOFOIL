@@ -49,7 +49,7 @@ function ServicesPage() {
             and brings back approvals, receipts and plain-language status.
           </p>
         </div>
-        <div className="rounded-full border border-lime/40 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-lime">
+        <div className="w-full max-w-full rounded-full border border-lime/40 px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-lime sm:w-auto">
           Assigned to {founderName}
         </div>
       </section>
