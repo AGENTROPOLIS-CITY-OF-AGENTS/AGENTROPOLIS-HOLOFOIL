@@ -96,6 +96,9 @@ export function nextFounderAction(facts: ProjectFactV1[]): { label: string; reas
 export function relevantServices(facts: ProjectFactV1[]): HolofoilServiceId[] {
   const type = factValue(facts, "projectType") ?? "";
   const ids: HolofoilServiceId[] = ["DROP_CREATION", "COLLECTION_GENERATION"];
+  if (factValue(facts, "artwork") === "UNPRODUCED" || factValue(facts, "artwork") === "FOUND") {
+    ids.push("RECONSTRUCT_ASSETS");
+  }
   if (/TRADING|GAME|TCG/.test(type) || factValue(facts, "game")) ids.push("TCG_GAME_SERVICES");
   if (factValue(facts, "community")) ids.push("LIVE_SESH_SOCIAL_GAMES");
   if (factValue(facts, "rightsIntent")) ids.push("IP_EQUITY_ENGINE");

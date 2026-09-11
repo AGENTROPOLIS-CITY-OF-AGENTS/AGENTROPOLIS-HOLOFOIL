@@ -35,6 +35,7 @@ export const SERVICE_BUFFET: ServiceBuffetStep[] = [
     helper: "Pick only what you need. The production machinery stays behind the curtain.",
     services: [
       { id: "COLLECTION_GENERATION", label: "Generate collection", description: "Layer mixing, rules, DNA, metadata and collection packaging." },
+      { id: "RECONSTRUCT_ASSETS", label: "Rebuild my assets", description: "Optional. Rebuild production-ready layers from flattened, compressed, or incomplete references.", optional: true },
       { id: "TCG_GAME_SERVICES", label: "Add a game", description: "Optional reusable TCG and gameplay services for a project." , optional: true},
       { id: "LIVE_SESH_SOCIAL_GAMES", label: "Add live social play", description: "Optional Live Sesh and social-event game mechanics." , optional: true},
     ],

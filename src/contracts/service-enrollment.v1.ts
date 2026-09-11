@@ -9,6 +9,7 @@ export const HOLOFOIL_SERVICE_IDS = [
   "LIVE_SESH_SOCIAL_GAMES",
   "TCG_GAME_SERVICES",
   "IP_EQUITY_ENGINE",
+  "RECONSTRUCT_ASSETS",
 ] as const;
 
 export type HolofoilServiceId = (typeof HOLOFOIL_SERVICE_IDS)[number];

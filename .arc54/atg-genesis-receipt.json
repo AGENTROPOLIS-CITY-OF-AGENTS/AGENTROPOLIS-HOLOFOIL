@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "atg": "consumer-only",
+  "neuroAuthority": "GUIDANCE_AND_ROUTING_ONLY",
+  "genesis033": {
+    "count": 33,
+    "chainId": 46630,
+    "environment": "TESTNET",
+    "productionMint": false,
+    "publish": false,
+    "mainnet": false
+  },
+  "quantization": {
+    "reconstruct_gzip": 1633,
+    "genesis_panel_gzip": 2820,
+    "threeLoadedBeforeIntent": false,
+    "result": "PASS"
+  },
+  "holofoilOwnsHoodTerpsIp": false
+}

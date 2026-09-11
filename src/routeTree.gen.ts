@@ -18,6 +18,7 @@ import { Route as LabRouteImport } from './routes/lab'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProjectRouteImport } from './routes/project'
 import { Route as ProofRouteImport } from './routes/proof'
+import { Route as ReconstructRouteImport } from './routes/reconstruct'
 import { Route as SdkRouteImport } from './routes/sdk'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as StageRouteImport } from './routes/stage'
@@ -78,6 +79,11 @@ const ProjectRoute = ProjectRouteImport.update({
 const ProofRoute = ProofRouteImport.update({
   id: '/proof',
   path: '/proof',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReconstructRoute = ReconstructRouteImport.update({
+  id: '/reconstruct',
+  path: '/reconstruct',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SdkRoute = SdkRouteImport.update({
@@ -172,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/project': typeof ProjectRoute
   '/proof': typeof ProofRoute
+  '/reconstruct': typeof ReconstructRoute
   '/sdk': typeof SdkRoute
   '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
@@ -199,6 +206,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/project': typeof ProjectRoute
   '/proof': typeof ProofRoute
+  '/reconstruct': typeof ReconstructRoute
   '/sdk': typeof SdkRoute
   '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
@@ -227,6 +235,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/project': typeof ProjectRoute
   '/proof': typeof ProofRoute
+  '/reconstruct': typeof ReconstructRoute
   '/sdk': typeof SdkRoute
   '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
@@ -256,6 +265,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/project'
     | '/proof'
+    | '/reconstruct'
     | '/sdk'
     | '/services'
     | '/stage'
@@ -283,6 +293,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/project'
     | '/proof'
+    | '/reconstruct'
     | '/sdk'
     | '/services'
     | '/stage'
@@ -310,6 +321,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/project'
     | '/proof'
+    | '/reconstruct'
     | '/sdk'
     | '/services'
     | '/stage'
@@ -338,6 +350,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ProjectRoute: typeof ProjectRoute
   ProofRoute: typeof ProofRoute
+  ReconstructRoute: typeof ReconstructRoute
   SdkRoute: typeof SdkRoute
   ServicesRoute: typeof ServicesRoute
   StageRoute: typeof StageRoute
@@ -416,6 +429,13 @@ declare module '@tanstack/react-router' {
       path: '/proof'
       fullPath: '/proof'
       preLoaderRoute: typeof ProofRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reconstruct': {
+      id: '/reconstruct'
+      path: '/reconstruct'
+      fullPath: '/reconstruct'
+      preLoaderRoute: typeof ReconstructRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sdk': {
@@ -558,6 +578,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ProjectRoute: ProjectRoute,
   ProofRoute: ProofRoute,
+  ReconstructRoute: ReconstructRoute,
   SdkRoute: SdkRoute,
   ServicesRoute: ServicesRoute,
   StageRoute: StageRoute,
