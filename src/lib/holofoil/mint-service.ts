@@ -3,6 +3,7 @@ import {
   type HolofoilMintPreparationV1,
   type HolofoilMintReceiptV1,
   type HolofoilMintRequestV1,
+  type HolofoilProvisioningV1,
 } from "../../contracts/mint.v1.ts";
 
 export interface HolofoilCollectionRecord {
@@ -23,13 +24,23 @@ export interface HolofoilCollectionRecord {
   source?: string;
 }
 
+const AQUADUCT_ROBINHOOD_TESTNET: HolofoilProvisioningV1 = {
+  provider: "AGENTROPOLIS-AQUADUCT",
+  mode: "EXTERNAL_FAUCET",
+  network: "Robinhood Chain Testnet",
+  asset: "ETH",
+  url: "https://agentropolis-city-of-agents.github.io/AGENTROPOLIS-AQUADUCT/?chain=robinhood-testnet#faucets",
+  note: "AQUEDUCT routes users to the official Robinhood Chain Testnet faucet. Testnet tokens have no monetary value.",
+};
+
 /** Service-owned catalog. Unverified collections never present live scarcity. */
 export const SERVICE_COLLECTIONS: readonly HolofoilCollectionRecord[] = [
   {
     projectId: "hood-terps",
     collectionId: "hood-terps:collection",
     name: "HOOD TERPS",
-    chainLabel: "Robinhood Chain",
+    chainId: "46630",
+    chainLabel: "Robinhood Chain Testnet",
     phaseId: "public-draft",
     phaseLabel: "Public",
     live: false,
@@ -74,6 +85,7 @@ export function prepareMint(req: HolofoilMintRequestV1): HolofoilMintPreparation
       mintPrice: collection.priceDisplay,
       chainId: collection.chainId,
       chainLabel: collection.chainLabel,
+      provisioning: AQUADUCT_ROBINHOOD_TESTNET,
       simulation: {
         status: "SIMULATION",
         note: "Wallet is only required to mint. Browse remains wallet-free.",
@@ -96,6 +108,7 @@ export function prepareMint(req: HolofoilMintRequestV1): HolofoilMintPreparation
       estimatedNetworkFee: "ESTIMATE unavailable until a live adapter is attached",
       chainId: collection.chainId,
       chainLabel: collection.chainLabel,
+      provisioning: AQUADUCT_ROBINHOOD_TESTNET,
       simulation: {
         status: "SIMULATION",
         note: "Mint is not live. Holofoil simulated the request. No transaction was prepared and no token IDs were invented.",
@@ -119,6 +132,7 @@ export function prepareMint(req: HolofoilMintRequestV1): HolofoilMintPreparation
     contract: collection.contract,
     chainId: collection.chainId,
     chainLabel: collection.chainLabel,
+    provisioning: AQUADUCT_ROBINHOOD_TESTNET,
     simulation: { status: "READY", note: "Ready for governed execution." },
     transactionRequest: null,
     approvalState: "REQUIRED",
