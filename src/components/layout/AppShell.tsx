@@ -57,8 +57,9 @@ export function AppShell({ children }: { children: ReactNode }) {
               </p>
             </span>
           </Link>
+          <div className="hidden min-w-0 flex-1 items-center justify-end gap-2 lg:flex">
           <nav
-            className="hidden items-center gap-1 lg:flex"
+            className="flex min-w-0 items-center gap-0.5 overflow-x-auto"
             aria-label="Primary"
           >
             {NAV_ITEMS.map((item) => {
@@ -70,7 +71,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`rounded-full px-3 py-2 text-sm no-underline transition-colors ${
+                  className={`shrink-0 rounded-full px-2.5 py-2 text-sm no-underline transition-colors whitespace-nowrap ${
                     active
                       ? "bg-bg-subtle text-cyan"
                       : "text-muted hover:text-fg"
@@ -80,16 +81,17 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </Link>
               );
             })}
+          </nav>
             <SignedOut>
               <Link
                 to="/login"
-                className="ml-2 rounded-full bg-cyan px-3 py-2 text-sm font-medium text-bg no-underline"
+                className="shrink-0 rounded-full bg-cyan px-3 py-2 text-sm font-medium text-bg no-underline"
               >
                 Sign in
               </Link>
             </SignedOut>
             <UserButton />
-          </nav>
+          </div>
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border lg:hidden"

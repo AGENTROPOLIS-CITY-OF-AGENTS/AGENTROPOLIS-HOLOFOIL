@@ -63,19 +63,34 @@ export function SignInGate({
   return <>{fallback ?? <SignInButtons />}</>;
 }
 
-export function SignInButtons({ callbackURL = "/" }: { callbackURL?: string }) {
+export function SignInButtons({ callbackURL = "/services" }: { callbackURL?: string }) {
+  const [busy, setBusy] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
   return (
     <div className="flex w-full max-w-sm flex-col gap-2">
       {GROK_PROVIDERS.map((p) => (
         <button
           key={p.providerId}
           type="button"
-          onClick={() => signIn(p.providerId, { callbackURL })}
-          className="w-full cursor-pointer rounded-md border border-neutral-300 px-4 py-2 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"
+          disabled={busy !== null}
+          onClick={() => {
+            setBusy(p.providerId);
+            setError(null);
+            void signIn(p.providerId, {
+              callbackURL,
+              errorCallbackURL: "/login?error=oauth",
+            }).catch((err: unknown) => {
+              setBusy(null);
+              setError(err instanceof Error ? err.message : "Sign-in failed. Try another method.");
+            });
+          }}
+          className="min-h-12 w-full cursor-pointer rounded-full border border-border px-4 text-sm text-fg hover:border-cyan disabled:opacity-50"
         >
-          Continue with {p.label}
+          {busy === p.providerId ? "Connecting…" : `Continue with ${p.label}`}
         </button>
       ))}
+      {error ? <p className="text-sm text-crimson">{error}</p> : null}
     </div>
   );
 }

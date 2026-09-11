@@ -28,4 +28,7 @@ export type GrokProvider = {
 export const GROK_PROVIDERS: readonly GrokProvider[] = [
   { providerId: "grok-google", idp: "google", label: "Google" },
   { providerId: "grok-x", idp: "twitter", label: "X" },
+  { providerId: "grok-github", idp: "github", label: "GitHub" },
+  { providerId: "grok-apple", idp: "apple", label: "Apple" },
+  { providerId: "grok-discord", idp: "discord", label: "Discord" },
 ];

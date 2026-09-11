@@ -31,6 +31,7 @@ import { Route as EmbedMintRouteImport } from './routes/embed.mint'
 import { Route as IntakeGuidedRouteImport } from './routes/intake.guided'
 import { Route as IntakeTellRouteImport } from './routes/intake.tell'
 import { Route as IntakeUploadRouteImport } from './routes/intake.upload'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiHolofoilRegisterRouteImport } from './routes/api/holofoil/register'
 import { Route as InternalProofsHoodTerpsRouteImport } from './routes/internal/proofs/hood-terps'
 import { Route as ApiHolofoilAssetIdTelemetryRouteImport } from './routes/api/holofoil/$assetId.telemetry'
@@ -146,6 +147,11 @@ const IntakeUploadRoute = IntakeUploadRouteImport.update({
   path: '/upload',
   getParentRoute: () => IntakeRoute,
 } as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiHolofoilRegisterRoute = ApiHolofoilRegisterRouteImport.update({
   id: '/api/holofoil/register',
   path: '/api/holofoil/register',
@@ -191,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/intake/guided': typeof IntakeGuidedRoute
   '/intake/tell': typeof IntakeTellRoute
   '/intake/upload': typeof IntakeUploadRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
   '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
@@ -219,6 +226,7 @@ export interface FileRoutesByTo {
   '/intake/guided': typeof IntakeGuidedRoute
   '/intake/tell': typeof IntakeTellRoute
   '/intake/upload': typeof IntakeUploadRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
   '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
@@ -248,6 +256,7 @@ export interface FileRoutesById {
   '/intake/guided': typeof IntakeGuidedRoute
   '/intake/tell': typeof IntakeTellRoute
   '/intake/upload': typeof IntakeUploadRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
   '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
@@ -278,6 +287,7 @@ export interface FileRouteTypes {
     | '/intake/guided'
     | '/intake/tell'
     | '/intake/upload'
+    | '/api/auth/$'
     | '/api/holofoil/register'
     | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
@@ -306,6 +316,7 @@ export interface FileRouteTypes {
     | '/intake/guided'
     | '/intake/tell'
     | '/intake/upload'
+    | '/api/auth/$'
     | '/api/holofoil/register'
     | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
@@ -334,6 +345,7 @@ export interface FileRouteTypes {
     | '/intake/guided'
     | '/intake/tell'
     | '/intake/upload'
+    | '/api/auth/$'
     | '/api/holofoil/register'
     | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
@@ -360,6 +372,7 @@ export interface RootRouteChildren {
   ApiHealthRoute: typeof ApiHealthRoute
   ApiStoryboardRoute: typeof ApiStoryboardRoute
   EmbedMintRoute: typeof EmbedMintRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiHolofoilRegisterRoute: typeof ApiHolofoilRegisterRoute
   InternalProofsHoodTerpsRoute: typeof InternalProofsHoodTerpsRoute
   ApiHolofoilAssetIdTelemetryRoute: typeof ApiHolofoilAssetIdTelemetryRoute
@@ -522,6 +535,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntakeUploadRouteImport
       parentRoute: typeof IntakeRoute
     }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/holofoil/register': {
       id: '/api/holofoil/register'
       path: '/api/holofoil/register'
@@ -588,6 +608,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHealthRoute: ApiHealthRoute,
   ApiStoryboardRoute: ApiStoryboardRoute,
   EmbedMintRoute: EmbedMintRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiHolofoilRegisterRoute: ApiHolofoilRegisterRoute,
   InternalProofsHoodTerpsRoute: InternalProofsHoodTerpsRoute,
   ApiHolofoilAssetIdTelemetryRoute: ApiHolofoilAssetIdTelemetryRoute,
