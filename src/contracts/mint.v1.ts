@@ -28,6 +28,15 @@ export interface HolofoilMintSimulationV1 {
   note: string;
 }
 
+export interface HolofoilProvisioningV1 {
+  provider: "AGENTROPOLIS-AQUADUCT";
+  mode: "EXTERNAL_FAUCET";
+  network: string;
+  asset: string;
+  url: string;
+  note: string;
+}
+
 export interface HolofoilMintPreparationV1 {
   version: "1.0.0";
   requestId: string;
@@ -39,6 +48,7 @@ export interface HolofoilMintPreparationV1 {
   contract?: string;
   chainId?: string;
   chainLabel: string;
+  provisioning?: HolofoilProvisioningV1;
   simulation: HolofoilMintSimulationV1;
   transactionRequest: null | Record<string, unknown>;
   approvalState: "NONE" | "REQUIRED" | "BLOCKED";
