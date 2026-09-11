@@ -1,0 +1,38 @@
+{
+  "profile": "quantization-torque",
+  "version": 3,
+  "mode": "adaptive",
+  "snapshot": "q0-source-preservation",
+  "surface": "/drop + /builder Easy Mode + /embed/mint",
+  "initial_compressed_javascript_gzip_bytes": {
+    "shared_index": 122658,
+    "drop_route": 409,
+    "builder_route": 8755,
+    "embed_mint": 1668,
+    "drop_shell_estimate": 123067
+  },
+  "budget_gzip_bytes": 350000,
+  "largest_javascript_chunk_gzip_bytes": {
+    "WorldKit_three_deferred": 235322,
+    "index_shared": 122658
+  },
+  "nonessential_3d_bytes_before_intent": 0,
+  "nonessential_film_audio_bytes_before_intent": 0,
+  "server_side_three_on_drop": false,
+  "route_splitting": true,
+  "deferred_systems": [
+    "Three.js / R3F / Drei",
+    "wallet / Web3 libraries",
+    "HOOD TERPS mint panel (separate app)",
+    "SDK developer views"
+  ],
+  "source_preservation": "PASS",
+  "deterministic_gate": "PASS",
+  "acceptance": {
+    "easy_mode_no_web3": true,
+    "drop_no_three": true,
+    "no_fake_scarcity": true,
+    "hood_terps_not_merged": true
+  },
+  "result": "PASS"
+}

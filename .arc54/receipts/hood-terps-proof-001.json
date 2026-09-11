@@ -1,0 +1,118 @@
+{
+  "id": "hood-terps-proof-001",
+  "dataSource": "FIXTURE",
+  "wallet": "OFF",
+  "minting": "OFF",
+  "payments": "OFF",
+  "origin_contract": "origin-engine/contracts/hood-terps-psp-profile.v1.json",
+  "origin_psp_profile": "hood-terps-arc54-first-proof",
+  "origin_runtime": "CONTRACT-ONLY",
+  "entity_id": "hood-terps-proof-001",
+  "project_id": "hood-terps",
+  "dna": "PLACEHOLDER",
+  "canon_status": "PLACEHOLDER",
+  "supply_cap": 3333,
+  "creator_package": "fixture://hood-terps/proof-001",
+  "identity_chain": {
+    "source": "hood-terps-proof-001",
+    "creator": "hood-terps-proof-001",
+    "arcana": "hood-terps-proof-001",
+    "holofoil": "hood-terps-proof-001",
+    "battle": "hood-terps-proof-001",
+    "reward": "hood-terps-proof-001",
+    "collection": "hood-terps-proof-001"
+  },
+  "arcana_binding": {
+    "decidedBy": "ARCANA_FIXTURE",
+    "combat": {
+      "entityId": "hood-terps-proof-001",
+      "action": "STRIKE",
+      "damage": 1,
+      "foeHpBefore": 1,
+      "foeHpAfter": 0,
+      "outcome": "WIN",
+      "decidedBy": "ARCANA_FIXTURE",
+      "dataSource": "FIXTURE"
+    }
+  },
+  "holofoil_binding": {
+    "version": "1.0.0",
+    "entityId": "hood-terps-proof-001",
+    "dna": "PLACEHOLDER",
+    "material": {
+      "seedSource": "ENTITY_ID_AND_DNA",
+      "preset": "obsidian-foil",
+      "pointerTilt": true,
+      "inspectState": true,
+      "rewardReveal": true,
+      "packReveal": false
+    },
+    "provenance": {
+      "geometryReceipt": "PLACEHOLDER",
+      "sourceRepo": "AGENTROPOLIS-CITY-OF-AGENTS/HOOD-TERPS"
+    },
+    "foilHash": "3e701885",
+    "seed": "hood-terps-proof-001+PLACEHOLDER"
+  },
+  "hoodTerps": {
+    "dna": "PLACEHOLDER",
+    "genetics": {
+      "type": "PLACEHOLDER",
+      "parentage": null,
+      "dominance": null
+    },
+    "traits": null,
+    "geometryReceipt": "PLACEHOLDER",
+    "layerManifest": [],
+    "compositionStandard": "SQUARE_LOCKED",
+    "outputContract": {
+      "width": 2048,
+      "height": 2048,
+      "rgba": true,
+      "noStretch": true,
+      "noCrop": true
+    },
+    "geometry": {
+      "rig": "PLACEHOLDER",
+      "anchors": null,
+      "traitZones": null,
+      "protectedPolygons": null,
+      "smokeSplines": null
+    },
+    "validation": {
+      "geometryGate": "PLACEHOLDER",
+      "handItemOcclusion": "REAR_FINGER_ITEM_FRONT_FINGER",
+      "imageDimensions": {
+        "width": 2048,
+        "height": 2048
+      },
+      "approvedLayerOnly": true
+    },
+    "handItemRule": {
+      "required": true,
+      "occlusionOrder": "REAR_FINGER_ITEM_FRONT_FINGER"
+    }
+  },
+  "battle_result": {
+    "entityId": "hood-terps-proof-001",
+    "action": "STRIKE",
+    "damage": 1,
+    "foeHpBefore": 1,
+    "foeHpAfter": 0,
+    "outcome": "WIN",
+    "decidedBy": "ARCANA_FIXTURE",
+    "dataSource": "FIXTURE"
+  },
+  "reward_result": "revealed",
+  "collection_result": [
+    "hood-terps-proof-001"
+  ],
+  "identity_ids": [
+    "hood-terps-proof-001"
+  ],
+  "fiscal": {
+    "wallet": "OFF",
+    "minting": "OFF",
+    "payments": "OFF"
+  }
+}

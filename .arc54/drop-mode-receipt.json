@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "projectId": "job-draft",
+  "generatedAt": "2026-09-11T03:45:00.000Z",
+  "state": "DRAFT",
+  "verifiedFields": [],
+  "draftFields": ["collected", "remaining", "contract", "marketplace"],
+  "sourceRefs": [
+    "src/lib/creator-cloud/launch.ts",
+    "src/contracts/drop-mode.v1.ts",
+    "src/routes/drop.tsx"
+  ],
+  "quantization": {
+    "threeLoadedBeforeIntent": false,
+    "web3LoadedBeforeIntent": false,
+    "agentToolingLoadedBeforeIntent": false
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "profile_id": "hood-terps-arc54-first-proof",
+  "source": "AGENTROPOLIS-UTILITY-GRID/utilities/origin-engine/contracts/hood-terps-psp-profile.v1.json",
+  "runtime": "CONTRACT-ONLY",
+  "note": "Bound locally. Origin instantiate/verify is not executed in this slice."
+}

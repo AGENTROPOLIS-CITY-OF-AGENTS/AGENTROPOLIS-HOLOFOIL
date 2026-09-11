@@ -6,6 +6,7 @@ dist
 .tanstack
 .grok
 screenshots
+attachments
 *.log
 .env
 .env.local

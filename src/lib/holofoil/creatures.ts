@@ -1,0 +1,163 @@
+import type { FoilType } from "./materials";
+import type { Creature } from "./types";
+
+export const CREATURES: Creature[] = [
+  {
+    dexNumber: "001",
+    slug: "ember-fox",
+    name: "Ember Fox",
+    type: "fire",
+    rarity: "common",
+    stats: { pwr: 45, spd: 78, res: 40, bond: 62 },
+    lore: "A vulpine flame that warms mountain huts. It leaves trails of glowing soot that evaporate in spring air.",
+    accent: "#ff5e57",
+    colors: ["#ff5e57", "#ffdd59", "#ff3f34"],
+    serialPrefix: "EMB",
+  },
+  {
+    dexNumber: "002",
+    slug: "crystal-snail",
+    name: "Crystal Snail",
+    type: "crystal",
+    rarity: "common",
+    stats: { pwr: 38, spd: 22, res: 88, bond: 48 },
+    lore: "Its shell refracts moonlight into healing prisms. Travelers follow its moss path to fresh water.",
+    accent: "#00d2d3",
+    colors: ["#00d2d3", "#54a0ff", "#3ee0ff"],
+    serialPrefix: "CRS",
+  },
+  {
+    dexNumber: "003",
+    slug: "bubble-otter",
+    name: "Bubble Otter",
+    type: "water",
+    rarity: "common",
+    stats: { pwr: 51, spd: 70, res: 44, bond: 75 },
+    lore: "Plays among harbor pylons and emits high-buoyancy spheres during tempests.",
+    accent: "#54a0ff",
+    colors: ["#54a0ff", "#00d2d3", "#10ac84"],
+    serialPrefix: "BBO",
+  },
+  {
+    dexNumber: "004",
+    slug: "vine-tortoise",
+    name: "Vine Tortoise",
+    type: "plant",
+    rarity: "uncommon",
+    stats: { pwr: 58, spd: 18, res: 95, bond: 82 },
+    lore: "Carries a hanging garden on its back. Miniature lilies blossom from its plate during midday rain.",
+    accent: "#10ac84",
+    colors: ["#10ac84", "#ffdd59", "#1dd1a1"],
+    serialPrefix: "VNT",
+  },
+  {
+    dexNumber: "005",
+    slug: "static-mantis",
+    name: "Static Mantis",
+    type: "electric",
+    rarity: "uncommon",
+    stats: { pwr: 73, spd: 85, res: 35, bond: 50 },
+    lore: "Holds a thunderstorm in its forelimbs. High-voltage crackles signal monsoon changes.",
+    accent: "#feca57",
+    colors: ["#feca57", "#ff5e57", "#ff9f43"],
+    serialPrefix: "STM",
+  },
+  {
+    dexNumber: "006",
+    slug: "mirror-beetle",
+    name: "Mirror Beetle",
+    type: "crystal",
+    rarity: "uncommon",
+    stats: { pwr: 49, spd: 55, res: 82, bond: 60 },
+    lore: "Reflects predators until they retreat. Its shell matches nearby geometric layouts.",
+    accent: "#8b7cff",
+    colors: ["#8b7cff", "#00d2d3", "#341f97"],
+    serialPrefix: "MRB",
+  },
+  {
+    dexNumber: "007",
+    slug: "cinder-phoenix",
+    name: "Cinder Phoenix",
+    type: "fire",
+    rarity: "rare",
+    stats: { pwr: 85, spd: 92, res: 50, bond: 90 },
+    lore: "Bursts into renewal at the moment of failure. Warm plumes never consume themselves.",
+    accent: "#ff6b6b",
+    colors: ["#ff6b6b", "#ff9f43", "#ee5253"],
+    serialPrefix: "CNP",
+  },
+  {
+    dexNumber: "008",
+    slug: "tide-serpent",
+    name: "Tide Serpent",
+    type: "water",
+    rarity: "rare",
+    stats: { pwr: 80, spd: 74, res: 70, bond: 85 },
+    lore: "Coils around shipwrecks. Sapphire scales generate acoustic protective currents.",
+    accent: "#2e86de",
+    colors: ["#2e86de", "#48dbfb", "#0abde3"],
+    serialPrefix: "TDS",
+  },
+  {
+    dexNumber: "009",
+    slug: "dust-stalker",
+    name: "Dust Stalker",
+    type: "earth",
+    rarity: "rare",
+    stats: { pwr: 75, spd: 68, res: 72, bond: 70 },
+    lore: "Walks dry clay plains between heat waves and condenses sand into geometric fortifications.",
+    accent: "#ff9f43",
+    colors: ["#ff9f43", "#f9ca24", "#8395a7"],
+    serialPrefix: "DST",
+  },
+  {
+    dexNumber: "010",
+    slug: "aurora-stag",
+    name: "Aurora Stag",
+    type: "cosmic",
+    rarity: "epic",
+    stats: { pwr: 88, spd: 80, res: 84, bond: 94 },
+    lore: "Antlers trail polar aurora. Known to lead lost explorers to warmth in blizzards.",
+    accent: "#3ee0ff",
+    colors: ["#3ee0ff", "#8b7cff", "#2e86de"],
+    serialPrefix: "AUR",
+  },
+  {
+    dexNumber: "011",
+    slug: "void-whale",
+    name: "Void Whale",
+    type: "cosmic",
+    rarity: "epic",
+    stats: { pwr: 92, spd: 45, res: 90, bond: 91 },
+    lore: "Sings frequencies that cross star dimensions. Gravity ripples near its astral body.",
+    accent: "#341f97",
+    colors: ["#341f97", "#8b7cff", "#0abde3"],
+    serialPrefix: "VDW",
+  },
+  {
+    dexNumber: "012",
+    slug: "ancient-origin",
+    name: "Ancient Origin",
+    type: "mystic",
+    rarity: "legendary",
+    stats: { pwr: 99, spd: 95, res: 98, bond: 99 },
+    lore: "The first specimen, formed from cosmic memory. It returns once a generation.",
+    accent: "#b6f25c",
+    colors: ["#b6f25c", "#8b7cff", "#3ee0ff"],
+    serialPrefix: "ORG",
+  },
+];
+
+export function creatureBySlug(slug: string): Creature | undefined {
+  return CREATURES.find((c) => c.slug === slug);
+}
+
+export function foilForCreature(creature: Creature): FoilType {
+  if (creature.rarity === "legendary") return "obsidian-foil";
+  if (creature.rarity === "epic") return "rainbow-diffraction";
+  if (creature.type === "crystal") return "prism";
+  if (creature.type === "electric") return "neon-glitch";
+  if (creature.type === "metal") return "brushed-foil";
+  return "holographic";
+}
+

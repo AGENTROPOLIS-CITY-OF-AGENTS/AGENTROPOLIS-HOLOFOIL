@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "surface": "/intake + /project",
+  "quantization": {
+    "intake_gzip": 1510,
+    "upload_gzip": 2481,
+    "tell_gzip": 1690,
+    "guided_gzip": 909,
+    "project_gzip": 1524,
+    "threeLoadedBeforeIntent": false,
+    "web3LoadedBeforeIntent": false
+  },
+  "holofoilOwnsClientIp": false,
+  "neuroAuthority": "GUIDANCE_AND_ROUTING_ONLY",
+  "result": "PASS"
+}

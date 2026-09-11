@@ -1,0 +1,55 @@
+{
+  "generated": "2026-09-09",
+  "records": [
+    {
+      "path": "src/contracts/arc54-game-entity.ts",
+      "repository": "AGENTROPOLIS-CITY-OF-AGENTS/ARCANA-54",
+      "role": "ARCANA identity contract",
+      "tags": ["ARC54", "Arc54GameEntity", "holofoil"],
+      "short_summary": "Canonical game entity with shared id, creator package refs, holofoil material/seed, and provenance. sameCanonicalEntity compares id+projectId.",
+      "source_commit": "1590b0551e1373209bab065397128fba5edf48ef",
+      "hash": "673841b22e9fc2589439b932dc711e218eee4ac2",
+      "migration_status": "consume"
+    },
+    {
+      "path": "docs/ARCANA54-RELIQ54-INTEGRATION-CONTRACT.md",
+      "repository": "AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-HOLOFOIL",
+      "role": "identity binding",
+      "tags": ["HOLOFOIL", "ARCANA", "RELIQ", "HOOD TERPS"],
+      "short_summary": "Holofoil presents; ARCANA owns gameplay; RELIQ owns visual language. Same entity_id across card, battle, reward, collection.",
+      "source_commit": "d8ce1910555ca8ac4f98d27b1ace824da452aa3a",
+      "hash": "f4e9b63fcdbc0c985b016a39b53372ea933773eb",
+      "migration_status": "adopted"
+    },
+    {
+      "path": "docs/PLAYABLE-SLICE-PROTOCOL.md",
+      "repository": "AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-HOLOFOIL",
+      "role": "PSP consumer contract",
+      "tags": ["PSP", "ORIGIN", "HOLOFOIL"],
+      "short_summary": "Holofoil is a PSP presentation surface, not a duplicate Origin. No silent financial behavior.",
+      "source_commit": "b8a48f7",
+      "hash": "cd851791ac2e1251af5012807e9e1fa73fdd4257",
+      "migration_status": "adopted"
+    },
+    {
+      "path": "src/lib/holofoil/materials.ts",
+      "repository": "AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-HOLOFOIL",
+      "role": "deterministic materials",
+      "tags": ["HOLOFOIL", "material.v1"],
+      "short_summary": "agentropolis.holofoil.material.v1 with canonicalize/hash/export. Seeded from entity id in the proof.",
+      "source_commit": "727d53abd07064eefd95ce7ae8b49e223885e99f",
+      "hash": "local",
+      "migration_status": "reuse"
+    },
+    {
+      "path": "src/lib/holofoil/contracts.ts",
+      "repository": "AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-HOLOFOIL",
+      "role": "Origin→Holofoil→ARCANA adapters",
+      "tags": ["HOLOFOIL", "OriginApprovedAsset"],
+      "short_summary": "Existing typed pipeline. Proof uses the same material hash but binds collectible.assetId to the canonical entity id.",
+      "source_commit": "727d53abd07064eefd95ce7ae8b49e223885e99f",
+      "hash": "local",
+      "migration_status": "reuse"
+    }
+  ]
+}
