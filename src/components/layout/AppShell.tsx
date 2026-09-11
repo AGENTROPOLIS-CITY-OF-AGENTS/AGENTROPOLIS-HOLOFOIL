@@ -142,7 +142,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </span>
             <span>Materials · deterministic</span>
             <span>{reduced ? "Reduced motion · static foil" : "Pointer / tilt live"}</span>
-            <span className="ml-auto text-cyan">No mint · no wallet</span>
+            <span className="ml-auto text-cyan">Web2 First · Web3 Optional · Agent Ready</span>
           </div>
         </div>
       </header>

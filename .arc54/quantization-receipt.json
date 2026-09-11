@@ -1,0 +1,52 @@
+{
+  "profile": "quantization-torque",
+  "version": 3,
+  "mode": "adaptive",
+  "snapshot": "q0-source-preservation",
+  "measured": "2026-09-11",
+  "surface": "/builder Easy Mode",
+  "publish_artifact": ".vercel/output/static",
+  "initial_compressed_javascript_gzip_bytes": {
+    "shared_index": 122489,
+    "builder_route": 9915,
+    "holofoil_card_lazy": 1941,
+    "builder_shell_estimate": 134345
+  },
+  "budget_gzip_bytes": 350000,
+  "largest_javascript_chunk_gzip_bytes": {
+    "WorldKit_three_deferred": 235307,
+    "index_shared": 122489
+  },
+  "largest_initial_image_bytes": {
+    "og.jpg": 78071,
+    "holofoil-h.jpg": 40476
+  },
+  "nonessential_3d_bytes_before_intent": 0,
+  "nonessential_film_audio_bytes_before_intent": 0,
+  "server_side_three_on_builder": false,
+  "route_splitting": true,
+  "device_render_profile": "COOL default / reduced-motion static foil",
+  "deferred_systems": [
+    "Three.js / R3F / Drei (Campus, Stage)",
+    "HolofoilCard until Mix step (lazy)",
+    "wallet / Web3 libraries (none present)",
+    "internal HOOD TERPS proof",
+    "SDK developer views"
+  ],
+  "source_preservation": "PASS",
+  "selected_toolsets": ["deterministic DNA", "capacity math", "CSV parse"],
+  "denied_toolsets": ["wallet", "contract deploy", "LLM agent", "Three.js on /builder"],
+  "deterministic_gate": "PASS",
+  "acceptance": {
+    "easy_mode_no_web3": true,
+    "easy_mode_no_three": true,
+    "builder_under_350kb_gzip": true,
+    "campus_three_still_split": true
+  },
+  "result": "PASS",
+  "notes": [
+    "Campus/Stage still ship a 235 KB gzip WorldKit chunk when those routes are entered — intent-loaded, not on /builder.",
+    "SSR server function still contains drei for those 3D routes (pre-existing). Builder HTML path does not.",
+    "campus-hero.mp4 remains in public for Campus poster/video; not referenced by /builder."
+  ]
+}
