@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { MixerWorkspace } from "@/components/creator-cloud/MixerWorkspace";
+import { DropCockpit } from "@/components/creator-cloud/DropCockpit";
 import { layerFromUpload } from "@/lib/creator-cloud/catalog";
 import { applyAgentCommand } from "@/lib/creator-cloud/agent";
 import {
@@ -369,6 +370,10 @@ function BuilderPage() {
                     View advanced details: destination {state.destination} · no wallet loaded
                   </p>
                 ) : null}
+              </div>
+              <div className="mt-6">
+                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">Who gets access first?</p>
+                <DropCockpit state={state} onChange={commit} />
               </div>
             </div>
           ) : null}

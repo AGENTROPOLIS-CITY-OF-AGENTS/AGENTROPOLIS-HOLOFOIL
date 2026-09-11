@@ -1,5 +1,7 @@
 import type { FoilType } from "../holofoil/materials.ts";
 import type { CreatorCloudJobV1, TraitRule } from "../../contracts/creator-cloud-job.v1.ts";
+import type { MarketplaceRoute } from "../../contracts/drop-mode.v1.ts";
+import type { LaunchPlan } from "./launch.ts";
 
 export type LayerSource = "SAMPLE" | "UPLOAD";
 
@@ -64,6 +66,9 @@ export interface WorkspaceState {
   generated: GeneratedItem[];
   agentLog: string[];
   step: number;
+  launch: LaunchPlan;
+  dropVerified: boolean;
+  marketplaceRoutes: MarketplaceRoute[];
 }
 
 export const COLLECTION_TYPE_OPTIONS = [

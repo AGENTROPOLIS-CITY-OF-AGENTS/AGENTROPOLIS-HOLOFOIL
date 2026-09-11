@@ -1,6 +1,8 @@
 import type { TraitRule } from "../../contracts/creator-cloud-job.v1.ts";
-import type { WorkspaceState } from "./types.ts";
 import { FOIL_TYPES, type FoilType } from "../holofoil/materials.ts";
+import { applyRecipe, remainingSpots, shiftPhaseHours } from "./drop.ts";
+import { instantiateLaunchRecipe } from "./launch.ts";
+import type { WorkspaceState } from "./types.ts";
 
 export interface AgentResult {
   state: WorkspaceState;
@@ -84,6 +86,58 @@ export function applyAgentCommand(state: WorkspaceState, raw: string): AgentResu
     return {
       state: { ...state, seed: `seed-${Date.now().toString(36)}`, job: { ...state.job, composition: { ...state.job.composition, randomize: true } } },
       message: "Randomized seed. Previews will reshuffle.",
+      changed: true,
+    };
+  }
+
+  if (/show me the launch phases|launch phases/.test(lower)) {
+    const launch = state.launch ?? instantiateLaunchRecipe("SIMPLE_DROP");
+    const list = launch.phases.map((p) => p.label).join(" → ") || "No phases";
+    return { state, message: `Launch recipe ${launch.recipe}: ${list}.`, changed: false };
+  }
+
+  if (/early-access spots remain|early access spots/.test(lower)) {
+    return { state, message: remainingSpots(state), changed: false };
+  }
+
+  const shift = lower.match(/move the public launch (back|forward) (\d+) hours?/);
+  if (shift) {
+    const hours = Number(shift[2]) * (shift[1] === "back" ? -1 : 1);
+    return {
+      state: shiftPhaseHours(state, "PUBLIC", hours),
+      message: `Public launch moved ${hours} hours. Times stay DRAFT until verified.`,
+      changed: true,
+    };
+  }
+
+  if (/duplicate metadata/.test(lower)) {
+    const dups = state.generated.length
+      ? new Set(state.generated.map((g) => g.dna)).size !== state.generated.length
+      : false;
+    return {
+      state,
+      message: dups ? "Duplicate DNA present in generated set." : "No duplicate DNA in the current generated set.",
+      changed: false,
+    };
+  }
+
+  if (/simulate the launch cost/.test(lower)) {
+    return { state: { ...state, step: 4 }, message: "Launch cost is an ESTIMATE on the Price step.", changed: true };
+  }
+
+  const recipeHit = (
+    [
+      ["genesis", "GENESIS_DROP"],
+      ["community drop", "COMMUNITY_DROP"],
+      ["hype", "HYPE_DROP"],
+      ["membership", "MEMBERSHIP_DROP"],
+      ["simple", "SIMPLE_DROP"],
+    ] as const
+  ).find(([key]) => lower.includes(key));
+  if (recipeHit && /drop|recipe|launch/.test(lower)) {
+    return {
+      state: applyRecipe(state, recipeHit[1]),
+      message: `Launch recipe set to ${recipeHit[1]}.`,
       changed: true,
     };
   }

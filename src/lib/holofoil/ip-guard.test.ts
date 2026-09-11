@@ -75,6 +75,7 @@ test("navigation routing table is complete", () => {
   const paths = NAV_ITEMS.map((item) => item.to);
   assert.deepEqual(paths, [
     "/builder",
+    "/drop",
     "/",
     "/lab",
     "/studio",

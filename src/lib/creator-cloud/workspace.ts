@@ -1,5 +1,6 @@
 import { assertCreatorCloudJob, type CreatorCloudJobV1 } from "../../contracts/creator-cloud-job.v1.ts";
 import { sampleCatalog } from "./catalog.ts";
+import { instantiateLaunchRecipe } from "./launch.ts";
 import type { WorkspaceState } from "./types.ts";
 
 export function newJobId(): string {
@@ -55,6 +56,9 @@ export function initialWorkspace(): WorkspaceState {
     generated: [],
     agentLog: [],
     step: 0,
+    launch: instantiateLaunchRecipe("SIMPLE_DROP"),
+    dropVerified: false,
+    marketplaceRoutes: [],
   };
 }
 
