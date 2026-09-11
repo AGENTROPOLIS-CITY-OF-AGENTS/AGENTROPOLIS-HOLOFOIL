@@ -29,7 +29,7 @@ const AQUADUCT_ROBINHOOD_TESTNET: HolofoilProvisioningV1 = {
   mode: "EXTERNAL_FAUCET",
   network: "Robinhood Chain Testnet",
   asset: "ETH",
-  url: "https://agentropolis-city-of-agents.github.io/AGENTROPOLIS-AQUADUCT/?chain=robinhood-testnet#faucets",
+  url: "https://agentropolis-city-of-agents.github.io/AGENTROPOLIS-AQUADUCT/robinhood-testnet.html",
   note: "AQUEDUCT routes users to the official Robinhood Chain Testnet faucet. Testnet tokens have no monetary value.",
 };
 
