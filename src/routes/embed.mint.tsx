@@ -13,7 +13,7 @@ function EmbedMint() {
     collectionId: "hood-terps:collection",
     quantity: qty,
     recipient: wallet ? "connected-account" : undefined,
-    chainId: undefined,
+    chainId: "46630",
   };
   const prep = prepareMint(req);
   const receipt = mintReceiptFromPrep(req, prep);
@@ -23,7 +23,7 @@ function EmbedMint() {
       <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cyan">Holofoil mint service</p>
       <h1 className="mt-2 font-display text-3xl">Mint panel</h1>
       <p className="mt-2 text-sm text-muted">
-        Embeddable service UI. Consumers (including HOOD TERPS) brand their own panel and call this service.
+        HOOD TERPS test mint path. Holofoil prepares the mint; AGENTROPOLIS AQUEDUCT handles testnet provisioning.
       </p>
       <p className="mt-4 text-sm">
         Phase: {prep.state} · {prep.chainLabel}
@@ -45,6 +45,21 @@ function EmbedMint() {
       >
         {wallet ? "Account attached (simulation)" : "Connect account to mint"}
       </button>
+      {prep.provisioning ? (
+        <a
+          className="mt-3 flex min-h-11 w-full items-center justify-center rounded-full border border-cyan px-4 text-center text-sm font-semibold text-cyan"
+          href={prep.provisioning.url}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Get Robinhood testnet ETH via AQUEDUCT
+        </a>
+      ) : null}
+      {prep.provisioning ? (
+        <p className="mt-2 text-xs text-muted">
+          {prep.provisioning.note} Return here after your test wallet is funded.
+        </p>
+      ) : null}
       <pre className="mt-4 overflow-auto rounded-xl border border-border p-3 font-mono text-[11px] text-muted">
         {JSON.stringify(receipt, null, 2)}
       </pre>
