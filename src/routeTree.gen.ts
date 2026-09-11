@@ -13,10 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuilderRouteImport } from './routes/builder'
 import { Route as DexRouteImport } from './routes/dex'
 import { Route as DropRouteImport } from './routes/drop'
+import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as LabRouteImport } from './routes/lab'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProjectRouteImport } from './routes/project'
 import { Route as ProofRouteImport } from './routes/proof'
 import { Route as SdkRouteImport } from './routes/sdk'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as StageRouteImport } from './routes/stage'
 import { Route as StoryboardRouteImport } from './routes/storyboard'
 import { Route as StudioRouteImport } from './routes/studio'
@@ -24,6 +27,9 @@ import { Route as ApiGenerateRouteImport } from './routes/api/generate'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiStoryboardRouteImport } from './routes/api/storyboard'
 import { Route as EmbedMintRouteImport } from './routes/embed.mint'
+import { Route as IntakeGuidedRouteImport } from './routes/intake.guided'
+import { Route as IntakeTellRouteImport } from './routes/intake.tell'
+import { Route as IntakeUploadRouteImport } from './routes/intake.upload'
 import { Route as ApiHolofoilRegisterRouteImport } from './routes/api/holofoil/register'
 import { Route as InternalProofsHoodTerpsRouteImport } from './routes/internal/proofs/hood-terps'
 import { Route as ApiHolofoilAssetIdTelemetryRouteImport } from './routes/api/holofoil/$assetId.telemetry'
@@ -49,6 +55,11 @@ const DropRoute = DropRouteImport.update({
   path: '/drop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntakeRoute = IntakeRouteImport.update({
+  id: '/intake',
+  path: '/intake',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabRoute = LabRouteImport.update({
   id: '/lab',
   path: '/lab',
@@ -59,6 +70,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectRoute = ProjectRouteImport.update({
+  id: '/project',
+  path: '/project',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProofRoute = ProofRouteImport.update({
   id: '/proof',
   path: '/proof',
@@ -67,6 +83,11 @@ const ProofRoute = ProofRouteImport.update({
 const SdkRoute = SdkRouteImport.update({
   id: '/sdk',
   path: '/sdk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StageRoute = StageRouteImport.update({
@@ -104,6 +125,21 @@ const EmbedMintRoute = EmbedMintRouteImport.update({
   path: '/embed/mint',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntakeGuidedRoute = IntakeGuidedRouteImport.update({
+  id: '/guided',
+  path: '/guided',
+  getParentRoute: () => IntakeRoute,
+} as any)
+const IntakeTellRoute = IntakeTellRouteImport.update({
+  id: '/tell',
+  path: '/tell',
+  getParentRoute: () => IntakeRoute,
+} as any)
+const IntakeUploadRoute = IntakeUploadRouteImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => IntakeRoute,
+} as any)
 const ApiHolofoilRegisterRoute = ApiHolofoilRegisterRouteImport.update({
   id: '/api/holofoil/register',
   path: '/api/holofoil/register',
@@ -131,10 +167,13 @@ export interface FileRoutesByFullPath {
   '/builder': typeof BuilderRoute
   '/dex': typeof DexRoute
   '/drop': typeof DropRoute
+  '/intake': typeof IntakeRouteWithChildren
   '/lab': typeof LabRoute
   '/login': typeof LoginRoute
+  '/project': typeof ProjectRoute
   '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
+  '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
   '/studio': typeof StudioRoute
@@ -142,6 +181,9 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/storyboard': typeof ApiStoryboardRoute
   '/embed/mint': typeof EmbedMintRoute
+  '/intake/guided': typeof IntakeGuidedRoute
+  '/intake/tell': typeof IntakeTellRoute
+  '/intake/upload': typeof IntakeUploadRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
   '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
@@ -152,10 +194,13 @@ export interface FileRoutesByTo {
   '/builder': typeof BuilderRoute
   '/dex': typeof DexRoute
   '/drop': typeof DropRoute
+  '/intake': typeof IntakeRouteWithChildren
   '/lab': typeof LabRoute
   '/login': typeof LoginRoute
+  '/project': typeof ProjectRoute
   '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
+  '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
   '/studio': typeof StudioRoute
@@ -163,6 +208,9 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/storyboard': typeof ApiStoryboardRoute
   '/embed/mint': typeof EmbedMintRoute
+  '/intake/guided': typeof IntakeGuidedRoute
+  '/intake/tell': typeof IntakeTellRoute
+  '/intake/upload': typeof IntakeUploadRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
   '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
@@ -174,10 +222,13 @@ export interface FileRoutesById {
   '/builder': typeof BuilderRoute
   '/dex': typeof DexRoute
   '/drop': typeof DropRoute
+  '/intake': typeof IntakeRouteWithChildren
   '/lab': typeof LabRoute
   '/login': typeof LoginRoute
+  '/project': typeof ProjectRoute
   '/proof': typeof ProofRoute
   '/sdk': typeof SdkRoute
+  '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
   '/studio': typeof StudioRoute
@@ -185,6 +236,9 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/storyboard': typeof ApiStoryboardRoute
   '/embed/mint': typeof EmbedMintRoute
+  '/intake/guided': typeof IntakeGuidedRoute
+  '/intake/tell': typeof IntakeTellRoute
+  '/intake/upload': typeof IntakeUploadRoute
   '/api/holofoil/register': typeof ApiHolofoilRegisterRoute
   '/internal/proofs/hood-terps': typeof InternalProofsHoodTerpsRoute
   '/api/holofoil/$assetId/telemetry': typeof ApiHolofoilAssetIdTelemetryRoute
@@ -197,10 +251,13 @@ export interface FileRouteTypes {
     | '/builder'
     | '/dex'
     | '/drop'
+    | '/intake'
     | '/lab'
     | '/login'
+    | '/project'
     | '/proof'
     | '/sdk'
+    | '/services'
     | '/stage'
     | '/storyboard'
     | '/studio'
@@ -208,6 +265,9 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/storyboard'
     | '/embed/mint'
+    | '/intake/guided'
+    | '/intake/tell'
+    | '/intake/upload'
     | '/api/holofoil/register'
     | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
@@ -218,10 +278,13 @@ export interface FileRouteTypes {
     | '/builder'
     | '/dex'
     | '/drop'
+    | '/intake'
     | '/lab'
     | '/login'
+    | '/project'
     | '/proof'
     | '/sdk'
+    | '/services'
     | '/stage'
     | '/storyboard'
     | '/studio'
@@ -229,6 +292,9 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/storyboard'
     | '/embed/mint'
+    | '/intake/guided'
+    | '/intake/tell'
+    | '/intake/upload'
     | '/api/holofoil/register'
     | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
@@ -239,10 +305,13 @@ export interface FileRouteTypes {
     | '/builder'
     | '/dex'
     | '/drop'
+    | '/intake'
     | '/lab'
     | '/login'
+    | '/project'
     | '/proof'
     | '/sdk'
+    | '/services'
     | '/stage'
     | '/storyboard'
     | '/studio'
@@ -250,6 +319,9 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/storyboard'
     | '/embed/mint'
+    | '/intake/guided'
+    | '/intake/tell'
+    | '/intake/upload'
     | '/api/holofoil/register'
     | '/internal/proofs/hood-terps'
     | '/api/holofoil/$assetId/telemetry'
@@ -261,10 +333,13 @@ export interface RootRouteChildren {
   BuilderRoute: typeof BuilderRoute
   DexRoute: typeof DexRoute
   DropRoute: typeof DropRoute
+  IntakeRoute: typeof IntakeRouteWithChildren
   LabRoute: typeof LabRoute
   LoginRoute: typeof LoginRoute
+  ProjectRoute: typeof ProjectRoute
   ProofRoute: typeof ProofRoute
   SdkRoute: typeof SdkRoute
+  ServicesRoute: typeof ServicesRoute
   StageRoute: typeof StageRoute
   StoryboardRoute: typeof StoryboardRoute
   StudioRoute: typeof StudioRoute
@@ -308,6 +383,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DropRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/intake': {
+      id: '/intake'
+      path: '/intake'
+      fullPath: '/intake'
+      preLoaderRoute: typeof IntakeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab': {
       id: '/lab'
       path: '/lab'
@@ -322,6 +404,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/project': {
+      id: '/project'
+      path: '/project'
+      fullPath: '/project'
+      preLoaderRoute: typeof ProjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/proof': {
       id: '/proof'
       path: '/proof'
@@ -334,6 +423,13 @@ declare module '@tanstack/react-router' {
       path: '/sdk'
       fullPath: '/sdk'
       preLoaderRoute: typeof SdkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stage': {
@@ -385,6 +481,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmbedMintRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/intake/guided': {
+      id: '/intake/guided'
+      path: '/guided'
+      fullPath: '/intake/guided'
+      preLoaderRoute: typeof IntakeGuidedRouteImport
+      parentRoute: typeof IntakeRoute
+    }
+    '/intake/tell': {
+      id: '/intake/tell'
+      path: '/tell'
+      fullPath: '/intake/tell'
+      preLoaderRoute: typeof IntakeTellRouteImport
+      parentRoute: typeof IntakeRoute
+    }
+    '/intake/upload': {
+      id: '/intake/upload'
+      path: '/upload'
+      fullPath: '/intake/upload'
+      preLoaderRoute: typeof IntakeUploadRouteImport
+      parentRoute: typeof IntakeRoute
+    }
     '/api/holofoil/register': {
       id: '/api/holofoil/register'
       path: '/api/holofoil/register'
@@ -416,15 +533,33 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface IntakeRouteChildren {
+  IntakeGuidedRoute: typeof IntakeGuidedRoute
+  IntakeTellRoute: typeof IntakeTellRoute
+  IntakeUploadRoute: typeof IntakeUploadRoute
+}
+
+const IntakeRouteChildren: IntakeRouteChildren = {
+  IntakeGuidedRoute: IntakeGuidedRoute,
+  IntakeTellRoute: IntakeTellRoute,
+  IntakeUploadRoute: IntakeUploadRoute,
+}
+
+const IntakeRouteWithChildren =
+  IntakeRoute._addFileChildren(IntakeRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuilderRoute: BuilderRoute,
   DexRoute: DexRoute,
   DropRoute: DropRoute,
+  IntakeRoute: IntakeRouteWithChildren,
   LabRoute: LabRoute,
   LoginRoute: LoginRoute,
+  ProjectRoute: ProjectRoute,
   ProofRoute: ProofRoute,
   SdkRoute: SdkRoute,
+  ServicesRoute: ServicesRoute,
   StageRoute: StageRoute,
   StoryboardRoute: StoryboardRoute,
   StudioRoute: StudioRoute,

@@ -1,4 +1,6 @@
 export const NAV_ITEMS = [
+  { to: "/intake", label: "New Project", hint: "Start" },
+  { to: "/project", label: "Workspace", hint: "Ready" },
   { to: "/services", label: "Services", hint: "NEURO" },
   { to: "/builder", label: "Build My Drop", hint: "Create" },
   { to: "/drop", label: "Drop", hint: "Launch" },

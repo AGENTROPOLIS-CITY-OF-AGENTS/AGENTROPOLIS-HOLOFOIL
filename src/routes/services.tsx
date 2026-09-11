@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
@@ -140,7 +140,9 @@ function ServicesPage() {
             <div><dt className="text-muted">Email</dt><dd>{user.primaryEmail ?? "Not provided"}</dd></div>
             <div><dt className="text-muted">Plan</dt><dd>{PLAN_TIERS.find((tier) => tier.id === plan)?.label}</dd></div>
           </dl>
-          <p className="mt-4 text-xs text-muted">Team plans add separate profiles and role-based permissions. A teammate never inherits founder authority just by joining the workspace.</p>
+          <Link to="/intake" className="mt-4 inline-block text-sm text-lime">
+            Start a new project
+          </Link>
         </article>
 
         <article className="rounded-2xl border border-border bg-bg-elevated p-5">
