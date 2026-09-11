@@ -117,6 +117,44 @@ Use for:
 
 Pointer tracking is presentation only. Touch and reduced-motion fallbacks must preserve the same meaning without hover effects.
 
+### Animated Feature Spotlight 3D
+Source install target:
+`https://21st.dev/r/ruixen.ui/animated-feature-spotlight3d`
+
+Use for:
+- featured champion or leaderboard leader hero
+- match winner reveal after the authoritative result is committed
+- featured Resident / cultivar / card showcase
+- tournament finals spotlight
+- premium Holofoil product or set reveal
+
+This component is an emphasis layer only. It may visualize committed truth but may not determine or imply uncommitted game state. GPU/mobile and reduced-motion fallbacks are required before promotion.
+
+### Feature Card 1
+Source install target:
+`https://21st.dev/r/ravikatiyar162/feature-card-1`
+
+Use for:
+- TCG format selection
+- Holofoil service/capability explanation
+- deck archetype or mode callouts
+- game onboarding modules
+- Creator-facing capability cards
+
+Do not use generic feature-card grids as a substitute for information architecture. Each surface still needs a clear dominant action.
+
+### Feature
+Source install target:
+`https://21st.dev/r/moazamtrade/feature`
+
+Use for:
+- progressive service discovery
+- TCG feature explanation
+- match-mode or leaderboard capability onboarding
+- Holofoil/Creator product education
+
+Use progressive disclosure rather than exposing every Holofoil or Agentropolis subsystem at once.
+
 ## Recommended TCG surfaces
 
 ### `/play`
@@ -124,6 +162,7 @@ Use:
 - Hover Preview for legal card/deck peeks
 - Spotlight Card for active/selected cards
 - Interactive List Preview for battle log / observable action history
+- Animated Feature Spotlight 3D only for non-blocking committed-result or featured-card presentation
 - HOLOFOIL native Three.js for table, card flip, foil, refraction and committed-result animation
 
 Avoid:
@@ -135,6 +174,7 @@ Avoid:
 Use:
 - Interactive List Preview as the official standings shell
 - Spotlight Card for top 3 / featured player
+- Animated Feature Spotlight 3D for champion/finals presentation after ranking truth is committed
 - Hover Preview for profile / deck / match summary peeks
 - Link Preview for replay / season / rules references
 - Tier List Maker as a separate "Meta Board" or community/editorial ranking tab
@@ -144,13 +184,21 @@ Use:
 - Tier List Maker for deck / card / Resident / cultivar meta tiers
 - Hover Preview for item details
 - Spotlight Card for trending / featured item
+- Feature Card 1 for archetype, format, or season explainers when useful
 
 ### `/recap`
 Use:
 - Scroll Expansion Hero for cinematic match or season recap
+- Animated Feature Spotlight 3D for winner/champion focus
 - Link Preview for source artifacts / replay links
 - Spotlight Card for winner / milestone callouts
 - HOLOFOIL native 3D for committed card and table presentation
+
+### `/discover` and onboarding
+Use:
+- Feature Card 1 for concise capability or format choices
+- Feature for progressive disclosure of game and Holofoil features
+- Hover Preview for fast context without navigation overhead
 
 ## Ownership boundaries
 
@@ -178,6 +226,8 @@ The 21st/shadcn components should be installed into the React implementation wor
 - hidden competitive state cannot leak through hover/link/list previews
 - reduced-motion and touch paths preserve meaning
 - spotlight effects do not encode authority or win state by color/effect alone
+- animated 3D emphasis only reflects committed state
+- feature-card layouts preserve clear information architecture and one dominant action per view
 - Spline is not a mandatory production dependency
 - no wallet, mint, token, contract, USDC or financial behavior is introduced by these UI components
 - HOLOFOIL animation occurs after deterministic result commit
