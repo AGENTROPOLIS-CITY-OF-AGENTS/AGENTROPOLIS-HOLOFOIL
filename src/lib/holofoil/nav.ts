@@ -1,4 +1,5 @@
 export const NAV_ITEMS = [
+  { to: "/services", label: "Services", hint: "NEURO" },
   { to: "/builder", label: "Build My Drop", hint: "Create" },
   { to: "/drop", label: "Drop", hint: "Launch" },
   { to: "/", label: "Campus", hint: "3D" },
