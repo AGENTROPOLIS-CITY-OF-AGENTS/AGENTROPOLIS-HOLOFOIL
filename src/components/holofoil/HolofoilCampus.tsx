@@ -54,7 +54,7 @@ export function HolofoilCampus() {
   }, []);
 
   const enter = (building: CampusBuilding) => {
-    if (building.to === "/") {
+    if (building.to === "/campus") {
       setSelectedId(building.id);
       return;
     }
@@ -208,7 +208,7 @@ export function HolofoilCampus() {
               </p>
               <p className="truncate font-display text-base text-fg sm:text-xl">{selected.name}</p>
             </div>
-            {selected.to === "/" ? (
+            {selected.to === "/campus" ? (
               <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-lime">
                 You are here
               </p>

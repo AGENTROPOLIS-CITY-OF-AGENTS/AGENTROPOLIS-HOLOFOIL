@@ -16,7 +16,7 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     id: "core",
     name: "Holofoil Core",
     hint: "Deterministic material system",
-    to: "/",
+    to: "/campus",
     accent: "#3ee0ff",
     position: [0, 0, 0],
     size: [2.6, 5.2, 2.6],

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuilderRouteImport } from './routes/builder'
+import { Route as CampusRouteImport } from './routes/campus'
 import { Route as DexRouteImport } from './routes/dex'
 import { Route as DropRouteImport } from './routes/drop'
 import { Route as IntakeRouteImport } from './routes/intake'
@@ -46,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
 const BuilderRoute = BuilderRouteImport.update({
   id: '/builder',
   path: '/builder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampusRoute = CampusRouteImport.update({
+  id: '/campus',
+  path: '/campus',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DexRoute = DexRouteImport.update({
@@ -183,6 +189,7 @@ const ApiHolofoilHallHallIdRoute = ApiHolofoilHallHallIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/builder': typeof BuilderRoute
+  '/campus': typeof CampusRoute
   '/dex': typeof DexRoute
   '/drop': typeof DropRoute
   '/intake': typeof IntakeRouteWithChildren
@@ -213,6 +220,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/builder': typeof BuilderRoute
+  '/campus': typeof CampusRoute
   '/dex': typeof DexRoute
   '/drop': typeof DropRoute
   '/intake': typeof IntakeRouteWithChildren
@@ -244,6 +252,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/builder': typeof BuilderRoute
+  '/campus': typeof CampusRoute
   '/dex': typeof DexRoute
   '/drop': typeof DropRoute
   '/intake': typeof IntakeRouteWithChildren
@@ -276,6 +285,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/builder'
+    | '/campus'
     | '/dex'
     | '/drop'
     | '/intake'
@@ -306,6 +316,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/builder'
+    | '/campus'
     | '/dex'
     | '/drop'
     | '/intake'
@@ -336,6 +347,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/builder'
+    | '/campus'
     | '/dex'
     | '/drop'
     | '/intake'
@@ -367,6 +379,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuilderRoute: typeof BuilderRoute
+  CampusRoute: typeof CampusRoute
   DexRoute: typeof DexRoute
   DropRoute: typeof DropRoute
   IntakeRoute: typeof IntakeRouteWithChildren
@@ -406,6 +419,13 @@ declare module '@tanstack/react-router' {
       path: '/builder'
       fullPath: '/builder'
       preLoaderRoute: typeof BuilderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campus': {
+      id: '/campus'
+      path: '/campus'
+      fullPath: '/campus'
+      preLoaderRoute: typeof CampusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dex': {
@@ -611,6 +631,7 @@ const IntakeRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuilderRoute: BuilderRoute,
+  CampusRoute: CampusRoute,
   DexRoute: DexRoute,
   DropRoute: DropRoute,
   IntakeRoute: IntakeRouteWithChildren,

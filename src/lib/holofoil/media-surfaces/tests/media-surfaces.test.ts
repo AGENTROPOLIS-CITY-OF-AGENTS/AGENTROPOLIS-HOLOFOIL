@@ -10,7 +10,7 @@ import { inferMime } from "../loaders/video.ts";
 import { commandFromFilename, commandFromKey, commandFromPointer } from "../interactions/dispatch.ts";
 import { reportAccessibility, releaseBlocked } from "../accessibility/report.ts";
 import { rightsFailClosed, validateMediaRecord } from "../schemas/validate.ts";
-import type { HolofoilMediaRecord, HolofoilPlaybackContext, HolofoilSurfaceRecord } from "../schemas/types.ts";
+import { LANDING_CHAPTERS, LANDING_MEDIA, LANDING_SECTIONS, ensureLandingMedia } from "../../../../data/media-surfaces/landing.ts";
 
 const ROOT = join(import.meta.dirname, "../../../../../");
 
@@ -287,5 +287,16 @@ test("focus loss clears the audible surface", () => {
   engine.audio.setAudible("surface-001");
   engine.updateContext(ctx({ windowFocused: false, pageVisible: true }));
   assert.equal(engine.audio.get().audibleSurfaceId, null);
+});
+
+test("landing documentary registers approved films", () => {
+  const engine = new HolofoilMediaSurfaceEngine();
+  ensureLandingMedia(engine);
+  assert.equal(engine.media.size, LANDING_MEDIA.length);
+  assert.equal(engine.resolve("surface-hero").media?.id, "media-hero");
+  engine.openCinema("surface-belong");
+  assert.equal(engine.expandedSurfaceId, "surface-belong");
+  assert.equal(LANDING_CHAPTERS.length, 5);
+  assert.ok(LANDING_SECTIONS.every((row) => row.neuro.startsWith("NEURO:")));
 });
 
