@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion } from "@/lib/holofoil/motion";
 import type { HolofoilMediaSurfaceEngine } from "../core/engine.ts";
 import { createManagedVideo } from "../loaders/video.ts";
-import { commandFromKey } from "../interactions/dispatch.ts";
+import { commandFromKey, commandFromPointer } from "../interactions/dispatch.ts";
 import { FallbackSurface } from "../components/FallbackSurface.tsx";
 import { CinemaOverlay } from "../components/CinemaOverlay.tsx";
 import { AudioStatus } from "../components/AudioStatus.tsx";
@@ -100,26 +100,28 @@ export function HolofoilDomSurface({
   const label = media?.altText ?? media?.title ?? "Media surface";
   const audio = engine.audio.get();
 
+  const openCinema = () => {
+    if (!media) return;
+    engine.audio.authorize();
+    engine.audio.setGlobalMute(false);
+    engine.report("interaction_opened", { surfaceId });
+    engine.report("audio_enabled", { surfaceId });
+    setExpanded(true);
+    void videoRef.current?.play();
+  };
+
   return (
     <div
       ref={hostRef}
-      className={["relative", className].filter(Boolean).join(" ")}
+      className={["relative cursor-pointer", className].filter(Boolean).join(" ")}
       tabIndex={0}
-      role="group"
-      aria-label={label}
+      role="button"
+      aria-label={`Open and play ${label}`}
       onKeyDown={(event) => {
         const command = commandFromKey(event.key, resolved.surface.interactionMode, media?.destinationUrl);
         if (command.type === "none") return;
         event.preventDefault();
-        if (command.type === "expand") {
-          setExpanded(true);
-          engine.audio.authorize();
-          engine.report("interaction_opened", { surfaceId });
-        }
-        if (command.type === "authorize_audio") {
-          engine.audio.authorize();
-          engine.report("audio_enabled", { surfaceId });
-        }
+        if (command.type === "expand" || command.type === "authorize_audio") openCinema();
         if (command.type === "close") {
           setExpanded(false);
           engine.report("interaction_closed", { surfaceId });
@@ -130,7 +132,12 @@ export function HolofoilDomSurface({
         }
       }}
       onClick={() => {
-        engine.audio.authorize();
+        const command = commandFromPointer(resolved.surface.interactionMode, media?.destinationUrl);
+        if (command.type === "open_destination" && command.url.startsWith("https://")) {
+          window.open(command.url, "_blank", "noopener,noreferrer");
+          return;
+        }
+        if (command.type !== "none") openCinema();
       }}
       style={{
         outlineColor: theme.focusColor,
@@ -145,8 +152,10 @@ export function HolofoilDomSurface({
       {expanded ? (
         <CinemaOverlay
           theme={theme}
+          src={media?.source}
           poster={poster}
           label={label}
+          loop={media?.loop !== false}
           onClose={() => {
             setExpanded(false);
             engine.report("interaction_closed", { surfaceId });

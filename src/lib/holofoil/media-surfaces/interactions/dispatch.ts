@@ -32,6 +32,18 @@ export function commandFromKey(
   return { type: "none" };
 }
 
+export function commandFromPointer(
+  mode: HolofoilInteractionMode = "none",
+  destinationUrl?: string,
+): InteractionCommand {
+  if (mode === "none") return { type: "none" };
+  if (mode === "portal") {
+    if (!destinationUrl) return { type: "none" };
+    return { type: "open_destination", url: destinationUrl };
+  }
+  return { type: "expand" };
+}
+
 export function commandFromFilename(_name: string): InteractionCommand {
   return { type: "none" };
 }

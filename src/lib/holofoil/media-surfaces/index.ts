@@ -15,7 +15,7 @@ export { DEFAULT_GOVERNOR, selectPlayableSurfaces } from "./performance/governor
 export { ingestMediaFiles } from "./loaders/ingest.ts";
 export { HolofoilDomSurface } from "./adapters/dom.tsx";
 export { createAudioController, audioAttenuation } from "./core/audio.ts";
-export { commandFromKey, commandFromFilename } from "./interactions/dispatch.ts";
+export { commandFromKey, commandFromFilename, commandFromPointer } from "./interactions/dispatch.ts";
 export { reportAccessibility, releaseBlocked } from "./accessibility/report.ts";
 export { FallbackSurface } from "./components/FallbackSurface.tsx";
 export { CinemaOverlay } from "./components/CinemaOverlay.tsx";

@@ -4,6 +4,8 @@ import * as THREE from "three";
 import { prefersReducedMotion } from "@/lib/holofoil/motion";
 import type { HolofoilMediaSurfaceEngine } from "../core/engine.ts";
 import { createManagedVideo } from "../loaders/video.ts";
+import { CinemaOverlay } from "../components/CinemaOverlay.tsx";
+import { commandFromPointer } from "../interactions/dispatch.ts";
 
 export function HolofoilR3FSurface({
   surfaceId,
@@ -19,6 +21,7 @@ export function HolofoilR3FSurface({
   const group = useRef<THREE.Group>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
   const [failed, setFailed] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const posterTex = useMemo(() => {
     if (!media?.poster || typeof document === "undefined") return null;
     const loader = new THREE.TextureLoader();
@@ -76,6 +79,22 @@ export function HolofoilR3FSurface({
   const aspect = media?.aspectRatio ?? scale[0] / scale[1];
   const width = scale[0];
   const height = width / aspect;
+  const label = media?.altText ?? media?.title ?? "Media surface";
+
+  const openCinema = (event: { stopPropagation: () => void }) => {
+    event.stopPropagation();
+    const command = commandFromPointer(surface.interactionMode, media?.destinationUrl);
+    if (command.type === "none") return;
+    if (command.type === "open_destination" && command.url.startsWith("https://")) {
+      window.open(command.url, "_blank", "noopener,noreferrer");
+      return;
+    }
+    engine.audio.authorize();
+    engine.audio.setGlobalMute(false);
+    engine.report("interaction_opened", { surfaceId });
+    engine.report("audio_enabled", { surfaceId });
+    setExpanded(true);
+  };
 
   return (
     <group ref={group} position={pos} rotation={rot}>
@@ -93,7 +112,17 @@ export function HolofoilR3FSurface({
           roughness={0.35}
         />
       </mesh>
-      <mesh position={[0, 0, 0.05]}>
+      <mesh
+        position={[0, 0, 0.05]}
+        onClick={openCinema}
+        onPointerDown={(event) => event.stopPropagation()}
+        onPointerOver={() => {
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = "auto";
+        }}
+      >
         <planeGeometry args={[width, height]} />
         {map ? (
           <meshBasicMaterial map={map} toneMapped={false} />
@@ -101,6 +130,19 @@ export function HolofoilR3FSurface({
           <meshBasicMaterial color={theme.loadingColor} />
         )}
       </mesh>
+      {expanded ? (
+        <CinemaOverlay
+          theme={theme}
+          src={media?.source}
+          poster={media?.poster}
+          label={label}
+          loop={media?.loop !== false}
+          onClose={() => {
+            setExpanded(false);
+            engine.report("interaction_closed", { surfaceId });
+          }}
+        />
+      ) : null}
     </group>
   );
 }

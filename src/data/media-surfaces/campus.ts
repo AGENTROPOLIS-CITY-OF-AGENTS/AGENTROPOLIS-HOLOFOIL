@@ -50,7 +50,7 @@ export const CAMPUS_SURFACES: HolofoilSurfaceRecord[] = [
     audioRadius: 8,
     mediaIds: ["media-001"],
     themeId: "theme-default",
-    interactionMode: "focus",
+    interactionMode: "expand",
   },
   {
     id: "surface-003",
@@ -61,7 +61,7 @@ export const CAMPUS_SURFACES: HolofoilSurfaceRecord[] = [
     activationRadius: 16,
     mediaIds: ["media-001"],
     themeId: "theme-default",
-    interactionMode: "focus",
+    interactionMode: "expand",
   },
 ];
 

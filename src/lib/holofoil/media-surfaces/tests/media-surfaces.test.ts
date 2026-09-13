@@ -7,7 +7,7 @@ import { audioAttenuation, createAudioController } from "../core/audio.ts";
 import { selectPlayableSurfaces } from "../performance/governor.ts";
 import { ingestMediaFiles } from "../loaders/ingest.ts";
 import { inferMime } from "../loaders/video.ts";
-import { commandFromFilename, commandFromKey } from "../interactions/dispatch.ts";
+import { commandFromFilename, commandFromKey, commandFromPointer } from "../interactions/dispatch.ts";
 import { reportAccessibility, releaseBlocked } from "../accessibility/report.ts";
 import { rightsFailClosed, validateMediaRecord } from "../schemas/validate.ts";
 import type { HolofoilMediaRecord, HolofoilPlaybackContext, HolofoilSurfaceRecord } from "../schemas/types.ts";
@@ -253,6 +253,12 @@ test("destinations are never inferred from filenames", () => {
   assert.equal(commandFromKey("Enter", "portal").type, "none");
   const opened = commandFromKey("Enter", "portal", "https://example.invalid/media-001");
   assert.equal(opened.type, "open_destination");
+});
+
+test("pointer click opens and plays instead of staying on a still", () => {
+  assert.equal(commandFromPointer("expand").type, "expand");
+  assert.equal(commandFromPointer("focus").type, "expand");
+  assert.equal(commandFromPointer("none").type, "none");
 });
 
 test("accessibility gaps block release", () => {
