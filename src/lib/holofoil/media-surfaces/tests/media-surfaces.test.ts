@@ -3,10 +3,12 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 import { HolofoilMediaSurfaceEngine } from "../core/engine.ts";
-import { createAudioController } from "../core/audio.ts";
+import { audioAttenuation, createAudioController } from "../core/audio.ts";
 import { selectPlayableSurfaces } from "../performance/governor.ts";
 import { ingestMediaFiles } from "../loaders/ingest.ts";
 import { inferMime } from "../loaders/video.ts";
+import { commandFromFilename, commandFromKey } from "../interactions/dispatch.ts";
+import { reportAccessibility, releaseBlocked } from "../accessibility/report.ts";
 import { rightsFailClosed, validateMediaRecord } from "../schemas/validate.ts";
 import type { HolofoilMediaRecord, HolofoilPlaybackContext, HolofoilSurfaceRecord } from "../schemas/types.ts";
 
@@ -46,6 +48,7 @@ function ctx(over: Partial<HolofoilPlaybackContext> = {}): HolofoilPlaybackConte
     camera: [0, 2, 4],
     visibleSurfaceIds: ["surface-001"],
     pageVisible: true,
+    windowFocused: true,
     reducedMotion: false,
     saveData: false,
     isMobile: false,
@@ -230,3 +233,46 @@ test("ingest preserves spaced filenames and does not auto-approve", () => {
   assert.ok(warnings.some((w) => w.code === "duplicate_asset"));
   assert.ok(warnings.some((w) => w.code === "skipped_file"));
 });
+
+test("playlist rotation prefers the scheduled slot", () => {
+  const engine = new HolofoilMediaSurfaceEngine();
+  engine.registerMedia([
+    validMedia({ id: "media-001", priority: 1 }),
+    validMedia({ id: "media-002", source: "/media/media-002.mp4", priority: 1 }),
+  ]);
+  engine.registerPlaylist({ id: "playlist-001", mediaIds: ["media-001", "media-002"], rotateMs: 1000 });
+  engine.registerSurfaces([surface({ playlistId: "playlist-001", mediaIds: undefined })]);
+  engine.updateContext(ctx({ nowMs: 0 }));
+  assert.equal(engine.resolve("surface-001").media?.id, "media-001");
+  engine.updateContext(ctx({ nowMs: 1000 }));
+  assert.equal(engine.resolve("surface-001").media?.id, "media-002");
+});
+
+test("destinations are never inferred from filenames", () => {
+  assert.equal(commandFromFilename("visit-store.mp4").type, "none");
+  assert.equal(commandFromKey("Enter", "portal").type, "none");
+  const opened = commandFromKey("Enter", "portal", "https://example.invalid/media-001");
+  assert.equal(opened.type, "open_destination");
+});
+
+test("accessibility gaps block release", () => {
+  const gaps = reportAccessibility([validMedia({ altText: undefined, title: undefined, captions: undefined })]);
+  assert.ok(gaps.some((g) => g.code === "missing_alt"));
+  assert.equal(releaseBlocked([validMedia({ altText: undefined, title: undefined })]), true);
+  assert.equal(releaseBlocked([validMedia()]), false);
+});
+
+test("distance attenuation reaches zero at radius", () => {
+  assert.equal(audioAttenuation(0, 10), 1);
+  assert.equal(audioAttenuation(10, 10), 0);
+  assert.equal(audioAttenuation(12, 10), 0);
+});
+
+test("focus loss clears the audible surface", () => {
+  const engine = new HolofoilMediaSurfaceEngine();
+  engine.audio.authorize();
+  engine.audio.setAudible("surface-001");
+  engine.updateContext(ctx({ windowFocused: false, pageVisible: true }));
+  assert.equal(engine.audio.get().audibleSurfaceId, null);
+});
+

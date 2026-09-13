@@ -27,13 +27,13 @@ export function writeStoredAudio(state: Pick<AudioState, "globalMute">): void {
   }
 }
 
-export function createAudioController(): {
-  get: () => AudioState;
-  authorize: () => void;
-  setGlobalMute: (mute: boolean) => void;
-  setAudible: (surfaceId: string | null) => void;
-  reset: () => void;
-} {
+export function audioAttenuation(distance: number, radius: number): number {
+  if (radius <= 0) return 0;
+  if (distance >= radius) return 0;
+  return Math.max(0, 1 - distance / radius);
+}
+
+export function createAudioController() {
   const stored = readStoredAudio();
   let state: AudioState = { authorized: false, globalMute: stored.globalMute, audibleSurfaceId: null };
   return {
@@ -41,16 +41,19 @@ export function createAudioController(): {
     authorize: () => {
       state = { ...state, authorized: true };
     },
-    setGlobalMute: (mute) => {
+    setGlobalMute: (mute: boolean) => {
       state = { ...state, globalMute: mute, audibleSurfaceId: mute ? null : state.audibleSurfaceId };
       writeStoredAudio({ globalMute: mute });
     },
-    setAudible: (surfaceId) => {
+    setAudible: (surfaceId: string | null) => {
       if (!state.authorized || state.globalMute) {
         state = { ...state, audibleSurfaceId: null };
         return;
       }
       state = { ...state, audibleSurfaceId: surfaceId };
+    },
+    onFocusLost: () => {
+      state = { ...state, audibleSurfaceId: null };
     },
     reset: () => {
       state = { authorized: false, globalMute: false, audibleSurfaceId: null };

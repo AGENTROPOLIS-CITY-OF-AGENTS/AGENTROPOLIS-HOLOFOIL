@@ -1,20 +1,3 @@
-/**
- * Holofoil Media-Surface Engine
- *
- * Shared infrastructure for turning registered video/image assets into
- * interactive, performance-aware surfaces. Consuming apps supply media,
- * placements, themes, and optional adapters. The core stays evergreen.
- *
- * Public API:
- *   registerHolofoilMedia
- *   registerHolofoilSurfaces
- *   registerHolofoilTheme
- *   registerHolofoilAdapter
- *   mountHolofoilSurface
- *   updateHolofoilContext
- *   disposeHolofoil
- *   getHolofoilMediaEngine
- */
 export {
   HolofoilMediaSurfaceEngine,
   disposeHolofoil,
@@ -22,6 +5,7 @@ export {
   mountHolofoilSurface,
   registerHolofoilAdapter,
   registerHolofoilMedia,
+  registerHolofoilPlaylists,
   registerHolofoilSurfaces,
   registerHolofoilTheme,
   updateHolofoilContext,
@@ -30,10 +14,16 @@ export { DEFAULT_MEDIA_THEME } from "./themes/default.ts";
 export { DEFAULT_GOVERNOR, selectPlayableSurfaces } from "./performance/governor.ts";
 export { ingestMediaFiles } from "./loaders/ingest.ts";
 export { HolofoilDomSurface } from "./adapters/dom.tsx";
-export { createAudioController } from "./core/audio.ts";
+export { createAudioController, audioAttenuation } from "./core/audio.ts";
+export { commandFromKey, commandFromFilename } from "./interactions/dispatch.ts";
+export { reportAccessibility, releaseBlocked } from "./accessibility/report.ts";
+export { FallbackSurface } from "./components/FallbackSurface.tsx";
+export { CinemaOverlay } from "./components/CinemaOverlay.tsx";
+export { AudioStatus } from "./components/AudioStatus.tsx";
 export type {
   HolofoilMediaRecord,
   HolofoilMediaTheme,
   HolofoilPlaybackContext,
+  HolofoilPlaylistRecord,
   HolofoilSurfaceRecord,
 } from "./schemas/types.ts";

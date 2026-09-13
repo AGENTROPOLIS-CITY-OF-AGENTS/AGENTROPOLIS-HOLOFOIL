@@ -53,8 +53,9 @@ export function selectPlayableSurfaces(input: {
     play.add(row.surface.id);
   }
 
-  const audible = config.audioExclusive
-    ? ranked.find((row) => play.has(row.surface.id) && input.context.audioAuthorized && !input.context.globalMute)?.surface.id ?? null
-    : null;
+  const audible =
+    config.audioExclusive && input.context.windowFocused !== false
+      ? ranked.find((row) => play.has(row.surface.id) && input.context.audioAuthorized && !input.context.globalMute)?.surface.id ?? null
+      : null;
   return { play, audible };
 }

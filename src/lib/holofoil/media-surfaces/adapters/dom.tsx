@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion } from "@/lib/holofoil/motion";
 import type { HolofoilMediaSurfaceEngine } from "../core/engine.ts";
 import { createManagedVideo } from "../loaders/video.ts";
+import { commandFromKey } from "../interactions/dispatch.ts";
+import { FallbackSurface } from "../components/FallbackSurface.tsx";
+import { CinemaOverlay } from "../components/CinemaOverlay.tsx";
+import { AudioStatus } from "../components/AudioStatus.tsx";
 
 export function HolofoilDomSurface({
   surfaceId,
@@ -29,6 +33,7 @@ export function HolofoilDomSurface({
         const visible = entry.isIntersecting && document.visibilityState === "visible";
         engine.updateContext({
           pageVisible: document.visibilityState === "visible",
+          windowFocused: document.hasFocus(),
           reducedMotion: prefersReducedMotion(),
           visibleSurfaceIds: visible ? [surfaceId] : [],
           nowMs: Date.now(),
@@ -43,10 +48,20 @@ export function HolofoilDomSurface({
         videoRef.current?.pause();
       }
     };
+    const onBlur = () => {
+      engine.updateContext({ windowFocused: false });
+      engine.audio.onFocusLost();
+      videoRef.current?.setMuted(true);
+    };
+    const onFocus = () => engine.updateContext({ windowFocused: true });
     document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("focus", onFocus);
     return () => {
       io.disconnect();
       document.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
     };
   }, [engine, surfaceId]);
 
@@ -83,23 +98,36 @@ export function HolofoilDomSurface({
   const poster = media?.poster;
   const showFallback = !media || failed || reduced || resolved.fallback !== "none";
   const label = media?.altText ?? media?.title ?? "Media surface";
+  const audio = engine.audio.get();
 
   return (
     <div
       ref={hostRef}
-      className={className}
+      className={["relative", className].filter(Boolean).join(" ")}
       tabIndex={0}
       role="group"
       aria-label={label}
       onKeyDown={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          if (resolved.surface.interactionMode === "expand") setExpanded(true);
+        const command = commandFromKey(event.key, resolved.surface.interactionMode, media?.destinationUrl);
+        if (command.type === "none") return;
+        event.preventDefault();
+        if (command.type === "expand") {
+          setExpanded(true);
+          engine.audio.authorize();
+          engine.report("interaction_opened", { surfaceId });
+        }
+        if (command.type === "authorize_audio") {
           engine.audio.authorize();
           engine.report("audio_enabled", { surfaceId });
         }
-        if (event.key === "Escape") setExpanded(false);
-        if (event.key === "m" || event.key === "M") engine.audio.setGlobalMute(!engine.audio.get().globalMute);
+        if (command.type === "close") {
+          setExpanded(false);
+          engine.report("interaction_closed", { surfaceId });
+        }
+        if (command.type === "toggle_mute") engine.audio.setGlobalMute(!engine.audio.get().globalMute);
+        if (command.type === "open_destination" && command.url.startsWith("https://")) {
+          window.open(command.url, "_blank", "noopener,noreferrer");
+        }
       }}
       onClick={() => {
         engine.audio.authorize();
@@ -110,30 +138,20 @@ export function HolofoilDomSurface({
         border: `${Math.max(1, theme.borderWidth * 16)}px solid ${theme.frameColor}`,
       }}
     >
-      {showFallback ? (
-        poster ? (
-          <img src={poster} alt={label} className="block h-auto w-full" />
-        ) : (
-          <div className="grid min-h-40 place-items-center text-sm" style={{ color: theme.typeColor, background: theme.errorColor }}>
-            Surface unavailable
-          </div>
-        )
-      ) : null}
+      {showFallback ? <FallbackSurface theme={theme} poster={poster} label={label} /> : null}
+      <div className="pointer-events-none absolute bottom-2 left-2">
+        <AudioStatus muted={audio.globalMute || !engine.canHear(surfaceId)} authorized={audio.authorized} />
+      </div>
       {expanded ? (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/80 p-4">
-          <button
-            type="button"
-            className="absolute top-4 right-4 min-h-11 rounded-full px-4"
-            style={{ background: theme.focusColor, color: theme.supportColor }}
-            onClick={() => {
-              setExpanded(false);
-              engine.report("interaction_closed", { surfaceId });
-            }}
-          >
-            Close
-          </button>
-          {poster ? <img src={poster} alt={label} className="max-h-full max-w-full" /> : null}
-        </div>
+        <CinemaOverlay
+          theme={theme}
+          poster={poster}
+          label={label}
+          onClose={() => {
+            setExpanded(false);
+            engine.report("interaction_closed", { surfaceId });
+          }}
+        />
       ) : null}
     </div>
   );

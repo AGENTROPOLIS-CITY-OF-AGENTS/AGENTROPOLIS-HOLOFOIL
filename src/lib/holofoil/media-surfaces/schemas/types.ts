@@ -91,6 +91,7 @@ export type HolofoilPlaybackContext = {
   camera: [number, number, number];
   visibleSurfaceIds: string[];
   pageVisible: boolean;
+  windowFocused: boolean;
   reducedMotion: boolean;
   saveData: boolean;
   isMobile: boolean;
@@ -98,6 +99,7 @@ export type HolofoilPlaybackContext = {
   nowMs: number;
   audioAuthorized: boolean;
   globalMute: boolean;
+  placementGroup?: string;
 };
 
 export type HolofoilGovernorConfig = {

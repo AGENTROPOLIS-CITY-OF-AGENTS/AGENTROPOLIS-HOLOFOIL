@@ -32,6 +32,7 @@ const defaultContext = (): HolofoilPlaybackContext => ({
   camera: [0, 2, 8],
   visibleSurfaceIds: [],
   pageVisible: true,
+  windowFocused: true,
   reducedMotion: false,
   saveData: false,
   isMobile: false,
@@ -115,12 +116,16 @@ export class HolofoilMediaSurfaceEngine {
     const audio = this.audio.get();
     this.context.audioAuthorized = audio.authorized;
     this.context.globalMute = audio.globalMute;
+    if (this.context.windowFocused === false || this.context.pageVisible === false) {
+      this.audio.onFocusLost();
+    }
     const dx = this.context.camera[0] - prev.camera[0];
     const dy = this.context.camera[1] - prev.camera[1];
     const dz = this.context.camera[2] - prev.camera[2];
     const moved = dx * dx + dy * dy + dz * dz > 0.04;
     const flags =
       this.context.pageVisible !== prev.pageVisible ||
+      this.context.windowFocused !== prev.windowFocused ||
       this.context.reducedMotion !== prev.reducedMotion ||
       this.context.isMobile !== prev.isMobile ||
       this.context.saveData !== prev.saveData ||
@@ -139,12 +144,19 @@ export class HolofoilMediaSurfaceEngine {
   }
 
   private pickMedia(surface: HolofoilSurfaceRecord, nowMs: number): { media: HolofoilMediaRecord | null; reason?: RegistryWarning } {
-    const ids = surface.playlistId
-      ? this.playlists.get(surface.playlistId)?.mediaIds ?? []
-      : surface.mediaIds ?? [];
+    const playlist = surface.playlistId ? this.playlists.get(surface.playlistId) : undefined;
+    let ids = playlist?.mediaIds ?? surface.mediaIds ?? [];
+    if (playlist?.rotateMs && playlist.rotateMs > 0 && ids.length > 1) {
+      const index = Math.floor(nowMs / playlist.rotateMs) % ids.length;
+      ids = [ids[index], ...ids.filter((_, i) => i !== index)];
+    }
     const ranked = ids
       .map((id) => this.media.get(id))
       .filter((item): item is HolofoilMediaRecord => Boolean(item))
+      .filter((item) => {
+        if (!this.context.placementGroup || !item.placementGroup) return true;
+        return item.placementGroup === this.context.placementGroup;
+      })
       .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
     if (!ids.length) return { media: null, reason: { code: "missing_assignment", message: "Surface has no media ids.", id: surface.id } };
     if (!ranked.length) return { media: null, reason: { code: "missing_asset", message: "Assigned media was not registered.", id: surface.id } };
@@ -170,7 +182,7 @@ export class HolofoilMediaSurfaceEngine {
         a11y: [],
       };
     }
-    const picked = this.pickMedia(surface, this.context.nowMs || Date.now());
+    const picked = this.pickMedia(surface, Number.isFinite(this.context.nowMs) ? this.context.nowMs : Date.now());
     if (!picked.media) {
       return {
         surface,
@@ -250,6 +262,10 @@ export function registerHolofoilMedia(records: unknown[]) {
 }
 export function registerHolofoilSurfaces(records: unknown[]) {
   return getHolofoilMediaEngine().registerSurfaces(records);
+}
+export function registerHolofoilPlaylists(playlists: HolofoilPlaylistRecord[]) {
+  const engine = getHolofoilMediaEngine();
+  for (const playlist of playlists) engine.registerPlaylist(playlist);
 }
 export function registerHolofoilTheme(theme: HolofoilMediaTheme) {
   getHolofoilMediaEngine().registerTheme(theme);
