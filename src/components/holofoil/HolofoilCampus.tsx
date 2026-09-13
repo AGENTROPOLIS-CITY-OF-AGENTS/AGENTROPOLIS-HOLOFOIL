@@ -8,6 +8,9 @@ import { CAMPUS_AGENTS } from "@/lib/holofoil/agents";
 import { prefersReducedMotion } from "@/lib/holofoil/motion";
 import { DistrictBuilding, Plaza, SceneLights, Skyline, TreePatch } from "@/components/holofoil/scene/WorldKit";
 import { WorkAgents } from "@/components/holofoil/scene/WorkAgents";
+import { HolofoilR3FSurface } from "@/lib/holofoil/media-surfaces/adapters/r3f";
+import { getHolofoilMediaEngine } from "@/lib/holofoil/media-surfaces";
+import { ensureCampusMediaSurfaces } from "@/data/media-surfaces/campus";
 
 export function HolofoilCampus() {
   const [selectedId, setSelectedId] = useState("lab");
@@ -15,6 +18,7 @@ export function HolofoilCampus() {
   const [reduced, setReduced] = useState(false);
   const hostRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const mediaEngine = getHolofoilMediaEngine();
   const selected =
     CAMPUS_BUILDINGS.find((b) => b.id === selectedId) ?? CAMPUS_BUILDINGS[1];
 
@@ -25,6 +29,10 @@ export function HolofoilCampus() {
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
+
+  useEffect(() => {
+    ensureCampusMediaSurfaces(mediaEngine);
+  }, [mediaEngine]);
 
   useEffect(() => {
     const el = hostRef.current;
@@ -110,6 +118,8 @@ export function HolofoilCampus() {
             </group>
           ))}
           <WorkAgents homes={CAMPUS_BUILDINGS} reduced={reduced} />
+          <HolofoilR3FSurface surfaceId="surface-002" engine={mediaEngine} />
+          <HolofoilR3FSurface surfaceId="surface-003" engine={mediaEngine} />
           {!reduced ? (
             <OrbitControls
               enablePan={false}

@@ -1,60 +1,23 @@
-import { useEffect, useRef, useState } from "react";
-import { prefersReducedMotion } from "@/lib/holofoil/motion";
+import { useEffect, useMemo } from "react";
+import { HolofoilDomSurface, getHolofoilMediaEngine } from "@/lib/holofoil/media-surfaces";
+import { ensureCampusMediaSurfaces } from "@/data/media-surfaces/campus";
 
 export function CampusHero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [reduced, setReduced] = useState(false);
-
+  const engine = useMemo(() => getHolofoilMediaEngine(), []);
   useEffect(() => {
-    setReduced(prefersReducedMotion());
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el || reduced) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          void el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [reduced]);
+    ensureCampusMediaSurfaces(engine);
+    engine.updateContext({
+      pageVisible: true,
+      visibleSurfaceIds: ["surface-001"],
+      nowMs: Date.now(),
+    });
+  }, [engine]);
 
   return (
-    <div className="relative overflow-hidden bg-bg">
-      {reduced ? (
-        <img
-          src="/campus-hero.jpg"
-          alt="AGENTROPOLIS HOLOFOIL Origin Engine campus"
-          width={1200}
-          height={752}
-          className="block h-auto w-full"
-        />
-      ) : (
-        <video
-          ref={videoRef}
-          className="block h-auto w-full"
-          poster="/campus-hero.jpg"
-          muted
-          loop
-          playsInline
-          autoPlay
-          preload="metadata"
-          aria-label="Origin Engine campus flythrough"
-        >
-          <source src="/campus-hero.mp4" type="video/mp4" />
-        </video>
-      )}
-    </div>
+    <HolofoilDomSurface
+      surfaceId="surface-001"
+      engine={engine}
+      className="relative overflow-hidden bg-bg"
+    />
   );
 }

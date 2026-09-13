@@ -80,6 +80,7 @@ test("navigation routing table is complete", () => {
     "/strategy",
     "/builder",
     "/drop",
+    "/embed/mint",
     "/",
     "/lab",
     "/studio",
