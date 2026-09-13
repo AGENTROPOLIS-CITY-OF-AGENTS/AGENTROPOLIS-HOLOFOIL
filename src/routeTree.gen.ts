@@ -23,6 +23,7 @@ import { Route as SdkRouteImport } from './routes/sdk'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as StageRouteImport } from './routes/stage'
 import { Route as StoryboardRouteImport } from './routes/storyboard'
+import { Route as StrategyRouteImport } from './routes/strategy'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as ApiGenerateRouteImport } from './routes/api/generate'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
@@ -107,6 +108,11 @@ const StoryboardRoute = StoryboardRouteImport.update({
   path: '/storyboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StrategyRoute = StrategyRouteImport.update({
+  id: '/strategy',
+  path: '/strategy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudioRoute = StudioRouteImport.update({
   id: '/studio',
   path: '/studio',
@@ -189,6 +195,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
+  '/strategy': typeof StrategyRoute
   '/studio': typeof StudioRoute
   '/api/generate': typeof ApiGenerateRoute
   '/api/health': typeof ApiHealthRoute
@@ -218,6 +225,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
+  '/strategy': typeof StrategyRoute
   '/studio': typeof StudioRoute
   '/api/generate': typeof ApiGenerateRoute
   '/api/health': typeof ApiHealthRoute
@@ -248,6 +256,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/stage': typeof StageRoute
   '/storyboard': typeof StoryboardRoute
+  '/strategy': typeof StrategyRoute
   '/studio': typeof StudioRoute
   '/api/generate': typeof ApiGenerateRoute
   '/api/health': typeof ApiHealthRoute
@@ -279,6 +288,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/stage'
     | '/storyboard'
+    | '/strategy'
     | '/studio'
     | '/api/generate'
     | '/api/health'
@@ -308,6 +318,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/stage'
     | '/storyboard'
+    | '/strategy'
     | '/studio'
     | '/api/generate'
     | '/api/health'
@@ -337,6 +348,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/stage'
     | '/storyboard'
+    | '/strategy'
     | '/studio'
     | '/api/generate'
     | '/api/health'
@@ -367,6 +379,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   StageRoute: typeof StageRoute
   StoryboardRoute: typeof StoryboardRoute
+  StrategyRoute: typeof StrategyRoute
   StudioRoute: typeof StudioRoute
   ApiGenerateRoute: typeof ApiGenerateRoute
   ApiHealthRoute: typeof ApiHealthRoute
@@ -477,6 +490,13 @@ declare module '@tanstack/react-router' {
       path: '/storyboard'
       fullPath: '/storyboard'
       preLoaderRoute: typeof StoryboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/strategy': {
+      id: '/strategy'
+      path: '/strategy'
+      fullPath: '/strategy'
+      preLoaderRoute: typeof StrategyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/studio': {
@@ -603,6 +623,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   StageRoute: StageRoute,
   StoryboardRoute: StoryboardRoute,
+  StrategyRoute: StrategyRoute,
   StudioRoute: StudioRoute,
   ApiGenerateRoute: ApiGenerateRoute,
   ApiHealthRoute: ApiHealthRoute,

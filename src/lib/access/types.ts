@@ -3,6 +3,7 @@ export const CAPABILITIES = [
   "holofoil.card-studio.use",
   "holofoil.3d-stage.use",
   "holofoil.project.create",
+  "holofoil.strategy.simulate",
   "origin.playable-slice.request",
   "creator.game-package.request",
   "internal.proofs.view",
@@ -30,6 +31,7 @@ export const MEMBER_CAPABILITIES: Capability[] = [
   "holofoil.card-studio.use",
   "holofoil.3d-stage.use",
   "holofoil.project.create",
+  "holofoil.strategy.simulate",
 ];
 
 export const INTERNAL_CAPABILITIES: Capability[] = [

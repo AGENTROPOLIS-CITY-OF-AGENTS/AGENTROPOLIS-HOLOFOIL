@@ -1,4 +1,4 @@
-export type AgentJob = "inspect" | "route" | "catalog" | "press" | "stage";
+export type AgentJob = "inspect" | "route" | "catalog" | "press" | "stage" | "simulate";
 
 export interface WorkAgentSpec {
   id: string;
@@ -15,6 +15,7 @@ export const AGENT_JOB_LABEL: Record<AgentJob, string> = {
   catalog: "cataloging a specimen",
   press: "pressing a card",
   stage: "rigging a pavilion",
+  simulate: "running a scenario",
 };
 
 export const CAMPUS_AGENTS: WorkAgentSpec[] = [
@@ -32,6 +33,7 @@ export const CAMPUS_AGENTS: WorkAgentSpec[] = [
   { id: "a12", color: "#ff7ad9", job: "press", home: "studio", speed: 1.18, phase: 0.96 },
   { id: "a13", color: "#b6f25c", job: "stage", home: "stage", speed: 1.0, phase: 0.08 },
   { id: "a14", color: "#ffb347", job: "route", home: "sdk", speed: 1.32, phase: 0.28 },
+  { id: "a15", color: "#b6f25c", job: "simulate", home: "strategy", speed: 1.12, phase: 0.37 },
 ];
 
 export const STAGE_AGENTS: WorkAgentSpec[] = [

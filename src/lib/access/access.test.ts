@@ -9,12 +9,14 @@ test("guest cannot access internal proof", () => {
   assert.equal(accessClass(guest), "GUEST");
   assert.equal(can(guest, "internal.proofs.view"), false);
   assert.equal(can(guest, "holofoil.material.use"), false);
+  assert.equal(can(guest, "holofoil.strategy.simulate"), false);
 });
 
 test("member cannot access internal proof without internal entitlement", () => {
   const member = resolveAccess({ authenticated: true, internal: false });
   assert.equal(accessClass(member), "MEMBER");
   assert.equal(can(member, "holofoil.material.use"), true);
+  assert.equal(can(member, "holofoil.strategy.simulate"), true);
   assert.equal(can(member, "internal.proofs.view"), false);
 });
 

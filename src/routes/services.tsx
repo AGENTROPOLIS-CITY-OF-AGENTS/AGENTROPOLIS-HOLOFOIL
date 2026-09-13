@@ -162,6 +162,11 @@ function ServicesPage() {
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-lime">Current selection</p>
         <h2 className="mt-1 font-display text-2xl">NEURO has your tray.</h2>
         <p className="mt-3 text-sm text-muted">{selectedLabels.length ? selectedLabels.join(" · ") : "No services selected yet."}</p>
+        {selected.includes("STRATEGY_LAB") ? (
+          <Link to="/strategy" className="mt-4 inline-flex min-h-11 items-center text-sm text-lime">
+            Open Strategy Lab
+          </Link>
+        ) : null}
         <p className="mt-3 text-xs text-muted">
           Service selection is not mint authority, wallet authority, publishing authority, financial approval, or an IP-rights grant.
         </p>

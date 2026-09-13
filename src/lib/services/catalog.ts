@@ -63,6 +63,30 @@ export const SERVICE_BUFFET: ServiceBuffetStep[] = [
     ],
     advanced: ["chain adapters", "AQUADUCT testnet", "wallet routing", "transaction receipts"],
   },
+  {
+    id: "test",
+    index: 5,
+    title: "Test",
+    question: "Want to test your idea before launch?",
+    helper: "I can run simulations before you commit. I’ll show you the strongest strategy, the weak spots, and anything players may exploit.",
+    services: [
+      {
+        id: "STRATEGY_LAB",
+        label: "Strategy Lab",
+        description: "Optional. Test your game, drop, community mechanics, incentives and scenarios before you commit.",
+        optional: true,
+      },
+    ],
+    advanced: [
+      "game theory",
+      "mechanism design",
+      "Monte Carlo",
+      "agent-based modeling",
+      "adversarial simulation",
+      "equilibrium analysis",
+      "sensitivity testing",
+    ],
+  },
 ];
 
 export const PLAN_TIERS = [

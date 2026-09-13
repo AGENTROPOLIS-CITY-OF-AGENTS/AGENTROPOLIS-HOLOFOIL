@@ -77,6 +77,7 @@ test("navigation routing table is complete", () => {
     "/intake",
     "/project",
     "/services",
+    "/strategy",
     "/builder",
     "/drop",
     "/",

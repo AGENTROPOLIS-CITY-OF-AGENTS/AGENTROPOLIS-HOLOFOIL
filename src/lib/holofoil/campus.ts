@@ -82,4 +82,14 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     size: [2.8, 1.9, 2.4],
     kind: "vault",
   },
+  {
+    id: "strategy",
+    name: "Strategy Lab",
+    hint: "Test before you commit",
+    to: "/strategy",
+    accent: "#b6f25c",
+    position: [8.4, 0, -2.8],
+    size: [2.6, 2.2, 2.4],
+    kind: "lab",
+  },
 ];
