@@ -61,6 +61,7 @@ export class HolofoilMediaSurfaceEngine {
   private telemetry = createTelemetry();
   private playable = new Set<string>();
   private audible: string | null = null;
+  expandedSurfaceId: string | null = null;
   private listeners = new Set<() => void>();
 
   registerMedia(records: unknown[]): RegistryWarning[] {
@@ -237,12 +238,30 @@ export class HolofoilMediaSurfaceEngine {
     this.telemetry.emit(event, payload);
   }
 
+  openCinema(surfaceId: string): void {
+    this.audio.authorize();
+    this.audio.setGlobalMute(false);
+    this.expandedSurfaceId = surfaceId;
+    this.report("interaction_opened", { surfaceId });
+    this.report("audio_enabled", { surfaceId });
+    this.emit();
+  }
+
+  closeCinema(): void {
+    if (this.expandedSurfaceId) {
+      this.report("interaction_closed", { surfaceId: this.expandedSurfaceId });
+    }
+    this.expandedSurfaceId = null;
+    this.emit();
+  }
+
   dispose(): void {
     this.media.clear();
     this.surfaces.clear();
     this.playlists.clear();
     this.playable.clear();
     this.audible = null;
+    this.expandedSurfaceId = null;
     this.audio.reset();
     this.listeners.clear();
     this.warnings = [];

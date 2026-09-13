@@ -259,6 +259,13 @@ test("pointer click opens and plays instead of staying on a still", () => {
   assert.equal(commandFromPointer("expand").type, "expand");
   assert.equal(commandFromPointer("focus").type, "expand");
   assert.equal(commandFromPointer("none").type, "none");
+  const engine = new HolofoilMediaSurfaceEngine();
+  engine.registerMedia([validMedia()]);
+  engine.registerSurfaces([surface({ interactionMode: "expand" })]);
+  engine.openCinema("surface-001");
+  assert.equal(engine.expandedSurfaceId, "surface-001");
+  engine.closeCinema();
+  assert.equal(engine.expandedSurfaceId, null);
 });
 
 test("accessibility gaps block release", () => {

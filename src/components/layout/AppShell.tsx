@@ -5,6 +5,8 @@ import { SignedOut, UserButton } from "@/lib/auth/gates";
 import { unlockAudio } from "@/lib/holofoil/audio";
 import { prefersReducedMotion } from "@/lib/holofoil/motion";
 import { NAV_ITEMS } from "@/lib/holofoil/nav";
+import { getHolofoilMediaEngine } from "@/lib/holofoil/media-surfaces";
+import { HolofoilCinemaHost } from "@/lib/holofoil/media-surfaces/components/CinemaHost";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -149,6 +151,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </header>
       <div id="main">{children}</div>
+      <HolofoilCinemaHost engine={getHolofoilMediaEngine()} />
     </div>
   );
 }

@@ -19,6 +19,7 @@ export { commandFromKey, commandFromFilename, commandFromPointer } from "./inter
 export { reportAccessibility, releaseBlocked } from "./accessibility/report.ts";
 export { FallbackSurface } from "./components/FallbackSurface.tsx";
 export { CinemaOverlay } from "./components/CinemaOverlay.tsx";
+export { HolofoilCinemaHost } from "./components/CinemaHost.tsx";
 export { AudioStatus } from "./components/AudioStatus.tsx";
 export type {
   HolofoilMediaRecord,

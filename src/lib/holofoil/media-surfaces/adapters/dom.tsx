@@ -4,7 +4,6 @@ import type { HolofoilMediaSurfaceEngine } from "../core/engine.ts";
 import { createManagedVideo } from "../loaders/video.ts";
 import { commandFromKey, commandFromPointer } from "../interactions/dispatch.ts";
 import { FallbackSurface } from "../components/FallbackSurface.tsx";
-import { CinemaOverlay } from "../components/CinemaOverlay.tsx";
 import { AudioStatus } from "../components/AudioStatus.tsx";
 
 export function HolofoilDomSurface({
@@ -20,7 +19,6 @@ export function HolofoilDomSurface({
   const theme = engine.themeFor(resolved.surface);
   const hostRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<ReturnType<typeof createManagedVideo>>(null);
-  const [expanded, setExpanded] = useState(false);
   const [failed, setFailed] = useState(false);
   const media = resolved.media;
   const reduced = prefersReducedMotion();
@@ -102,11 +100,7 @@ export function HolofoilDomSurface({
 
   const openCinema = () => {
     if (!media) return;
-    engine.audio.authorize();
-    engine.audio.setGlobalMute(false);
-    engine.report("interaction_opened", { surfaceId });
-    engine.report("audio_enabled", { surfaceId });
-    setExpanded(true);
+    engine.openCinema(surfaceId);
     void videoRef.current?.play();
   };
 
@@ -122,10 +116,7 @@ export function HolofoilDomSurface({
         if (command.type === "none") return;
         event.preventDefault();
         if (command.type === "expand" || command.type === "authorize_audio") openCinema();
-        if (command.type === "close") {
-          setExpanded(false);
-          engine.report("interaction_closed", { surfaceId });
-        }
+        if (command.type === "close") engine.closeCinema();
         if (command.type === "toggle_mute") engine.audio.setGlobalMute(!engine.audio.get().globalMute);
         if (command.type === "open_destination" && command.url.startsWith("https://")) {
           window.open(command.url, "_blank", "noopener,noreferrer");
@@ -149,19 +140,6 @@ export function HolofoilDomSurface({
       <div className="pointer-events-none absolute bottom-2 left-2">
         <AudioStatus muted={audio.globalMute || !engine.canHear(surfaceId)} authorized={audio.authorized} />
       </div>
-      {expanded ? (
-        <CinemaOverlay
-          theme={theme}
-          src={media?.source}
-          poster={poster}
-          label={label}
-          loop={media?.loop !== false}
-          onClose={() => {
-            setExpanded(false);
-            engine.report("interaction_closed", { surfaceId });
-          }}
-        />
-      ) : null}
     </div>
   );
 }
