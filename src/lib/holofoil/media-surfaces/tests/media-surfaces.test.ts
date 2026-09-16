@@ -10,6 +10,7 @@ import { inferMime } from "../loaders/video.ts";
 import { commandFromFilename, commandFromKey, commandFromPointer } from "../interactions/dispatch.ts";
 import { reportAccessibility, releaseBlocked } from "../accessibility/report.ts";
 import { rightsFailClosed, validateMediaRecord } from "../schemas/validate.ts";
+import type { HolofoilMediaRecord, HolofoilPlaybackContext, HolofoilSurfaceRecord } from "../schemas/types.ts";
 import { LANDING_CHAPTERS, LANDING_MEDIA, LANDING_SECTIONS, ensureLandingMedia } from "../../../../data/media-surfaces/landing.ts";
 
 const ROOT = join(import.meta.dirname, "../../../../../");

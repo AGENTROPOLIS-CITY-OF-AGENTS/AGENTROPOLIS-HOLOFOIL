@@ -12,6 +12,7 @@ export const NAV_ITEMS = [
   { to: "/studio", label: "Card Studio", hint: "Author" },
   { to: "/dex", label: "Creature-Dex", hint: "Specimens" },
   { to: "/stage", label: "3D Stage", hint: "Pavilions" },
+  { to: "/arcade", label: "Arcade", hint: "Play" },
   { to: "/storyboard", label: "Storyboard", hint: "Beats" },
   { to: "/sdk", label: "SDK / Integration", hint: "Contracts" },
 ] as const;

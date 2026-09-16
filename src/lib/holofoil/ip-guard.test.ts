@@ -87,6 +87,7 @@ test("navigation routing table is complete", () => {
     "/studio",
     "/dex",
     "/stage",
+    "/arcade",
     "/storyboard",
     "/sdk",
   ]);

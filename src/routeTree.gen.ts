@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArcadeRouteImport } from './routes/arcade'
 import { Route as BuilderRouteImport } from './routes/builder'
 import { Route as CampusRouteImport } from './routes/campus'
 import { Route as DexRouteImport } from './routes/dex'
@@ -42,6 +43,11 @@ import { Route as ApiHolofoilHallHallIdRouteImport } from './routes/api/holofoil
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArcadeRoute = ArcadeRouteImport.update({
+  id: '/arcade',
+  path: '/arcade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuilderRoute = BuilderRouteImport.update({
@@ -188,6 +194,7 @@ const ApiHolofoilHallHallIdRoute = ApiHolofoilHallHallIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/arcade': typeof ArcadeRoute
   '/builder': typeof BuilderRoute
   '/campus': typeof CampusRoute
   '/dex': typeof DexRoute
@@ -219,6 +226,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arcade': typeof ArcadeRoute
   '/builder': typeof BuilderRoute
   '/campus': typeof CampusRoute
   '/dex': typeof DexRoute
@@ -251,6 +259,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/arcade': typeof ArcadeRoute
   '/builder': typeof BuilderRoute
   '/campus': typeof CampusRoute
   '/dex': typeof DexRoute
@@ -284,6 +293,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/arcade'
     | '/builder'
     | '/campus'
     | '/dex'
@@ -315,6 +325,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/arcade'
     | '/builder'
     | '/campus'
     | '/dex'
@@ -346,6 +357,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/arcade'
     | '/builder'
     | '/campus'
     | '/dex'
@@ -378,6 +390,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArcadeRoute: typeof ArcadeRoute
   BuilderRoute: typeof BuilderRoute
   CampusRoute: typeof CampusRoute
   DexRoute: typeof DexRoute
@@ -412,6 +425,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arcade': {
+      id: '/arcade'
+      path: '/arcade'
+      fullPath: '/arcade'
+      preLoaderRoute: typeof ArcadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/builder': {
@@ -630,6 +650,7 @@ const IntakeRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArcadeRoute: ArcadeRoute,
   BuilderRoute: BuilderRoute,
   CampusRoute: CampusRoute,
   DexRoute: DexRoute,
