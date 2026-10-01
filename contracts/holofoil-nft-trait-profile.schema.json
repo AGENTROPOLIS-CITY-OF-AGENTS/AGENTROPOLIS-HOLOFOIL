@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentropolis.local/contracts/holofoil-nft-trait-profile.schema.json",
+  "title": "HOLOFOIL NFT Trait Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "profileId",
+    "projectId",
+    "nftRef",
+    "identity",
+    "rarity",
+    "material",
+    "foil",
+    "refraction",
+    "color",
+    "frame",
+    "environment",
+    "character",
+    "motion",
+    "dimensional",
+    "dynamic",
+    "erc404"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.0.0"
+    },
+    "profileId": {
+      "type": "string"
+    },
+    "projectId": {
+      "type": "string"
+    },
+    "nftRef": {
+      "type": "string"
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "rarity": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "material": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "foil": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "refraction": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "color": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "character": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "dimensional": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "dynamic": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "agentEntity": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "erc404": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "seed": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receiptRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
