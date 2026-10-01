@@ -27,3 +27,18 @@ See the canonical consumption contract in:
 This repository is initialized. The IP-clean 2027 material system lands on `codex/holofoil-2027-ip-clean`.
 
 > **Holofoil manifests. The IP District authorizes.**
+
+
+## Evergreen game integration
+
+All game-facing integrations SHOULD use the reusable HOLOFOIL Evergreen Game Integration Protocol:
+
+- `docs/EVERGREEN-GAME-INTEGRATION-PROTOCOL.md`
+- `contracts/holofoil-game-integration-manifest.v1.schema.json`
+- `contracts/templates/holofoil-game-integration-manifest.template.json`
+- `docs/GAME-INTEGRATION-CHECKLIST.md`
+- `docs/HERMES-HANDOFF-EVERGREEN-GAME-INTEGRATION.md`
+
+This keeps HOLOFOIL presentation reusable across BLOCKBANGERS, HOOD TERPS, PENGUIN ARCADE TCG, ARC agentic games, and future games without copying one game's mechanics into another.
+
+**Core law:** presentation follows committed game truth; game-specific evidence gates control promotion.
