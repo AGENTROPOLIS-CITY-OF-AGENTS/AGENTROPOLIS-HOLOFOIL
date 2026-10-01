@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentropolis.holofoil.game-integration-manifest.v1",
+  "title": "HOLOFOIL Game Integration Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "gameId",
+    "integrationId",
+    "status",
+    "authority",
+    "identity",
+    "presentation",
+    "evidence",
+    "production"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "gameId": { "type": "string", "minLength": 1 },
+    "integrationId": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": ["DRAFT","INTEGRATION","VALIDATED","DARK","CANARY","VERIFIED_CANARY","PRODUCTION","ROLLED_BACK","REVOKED"]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gameplay",
+        "presentation",
+        "identity",
+        "governance",
+        "rights",
+        "economy",
+        "ranking",
+        "rewards"
+      ],
+      "properties": {
+        "gameplay": { "type": "string", "minLength": 1 },
+        "presentation": { "const": "HOLOFOIL" },
+        "identity": { "const": "AGENTIC-ENTITY" },
+        "governance": { "type": "string", "minLength": 1 },
+        "rights": { "type": "string", "minLength": 1 },
+        "economy": { "type": "string", "minLength": 1 },
+        "ranking": { "type": "string", "minLength": 1 },
+        "rewards": { "type": "string", "minLength": 1 }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalEntityIdField","projectIdField","lineageRequired","sameEntityAcrossRepresentations"],
+      "properties": {
+        "canonicalEntityIdField": { "type": "string", "minLength": 1 },
+        "projectIdField": { "type": "string", "minLength": 1 },
+        "lineageRequired": { "const": true },
+        "sameEntityAcrossRepresentations": { "const": true }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["materialSchema","deterministic","committedStateOnly"],
+      "properties": {
+        "materialSchema": { "type": "string", "minLength": 1 },
+        "deterministic": { "const": true },
+        "committedStateOnly": { "const": true }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metrics","independentVerityRequired"],
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name","measurement","threshold","sampleSize","blocking"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "measurement": { "type": "string", "minLength": 1 },
+              "threshold": { "type": ["number","string","boolean"] },
+              "sampleSize": { "type": "integer", "minimum": 1 },
+              "blocking": { "type": "boolean" }
+            }
+          }
+        },
+        "independentVerityRequired": { "const": true }
+      }
+    },
+    "production": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtimeEnabled","rollout","rollbackRequired","economicExecution"],
+      "properties": {
+        "runtimeEnabled": { "type": "boolean" },
+        "rollout": { "enum": ["dark","canary","verified-canary","production","rolled-back"] },
+        "rollbackRequired": { "const": true },
+        "economicExecution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minting","walletSigning","tokenDeployment","treasury","liquidity"],
+          "properties": {
+            "minting": { "const": false },
+            "walletSigning": { "const": false },
+            "tokenDeployment": { "const": false },
+            "treasury": { "const": false },
+            "liquidity": { "const": false }
+          }
+        }
+      }
+    }
+  }
+}
