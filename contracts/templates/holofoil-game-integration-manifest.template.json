@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameId": "REPLACE_ME",
+  "integrationId": "REPLACE_ME-holofoil-v1",
+  "status": "DRAFT",
+  "authority": {
+    "gameplay": "REPLACE_ME",
+    "presentation": "HOLOFOIL",
+    "identity": "AGENTIC-ENTITY",
+    "governance": "REPLACE_ME",
+    "rights": "REPLACE_ME",
+    "economy": "REPLACE_ME",
+    "ranking": "REPLACE_ME",
+    "rewards": "REPLACE_ME"
+  },
+  "identity": {
+    "canonicalEntityIdField": "id",
+    "projectIdField": "projectId",
+    "lineageRequired": true,
+    "sameEntityAcrossRepresentations": true
+  },
+  "presentation": {
+    "materialSchema": "agentropolis.holofoil.material.v1",
+    "deterministic": true,
+    "committedStateOnly": true
+  },
+  "evidence": {
+    "metrics": [
+      {
+        "name": "REPLACE_ME",
+        "measurement": "REPLACE_ME",
+        "threshold": "REPLACE_ME",
+        "sampleSize": 1000,
+        "blocking": true
+      }
+    ],
+    "independentVerityRequired": true
+  },
+  "production": {
+    "runtimeEnabled": false,
+    "rollout": "dark",
+    "rollbackRequired": true,
+    "economicExecution": {
+      "minting": false,
+      "walletSigning": false,
+      "tokenDeployment": false,
+      "treasury": false,
+      "liquidity": false
+    }
+  }
+}
