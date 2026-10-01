@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "authority": "AGENTROPOLIS-HOLOFOIL",
+  "protocol": "docs/EVERGREEN-GAME-INTEGRATION-PROTOCOL.md",
+  "integrations": [
+    {
+      "gameId": "blockbangers",
+      "displayName": "BLOCKBANGERS",
+      "lane": "robinhood-chain",
+      "repository": "AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-GAMING-DISTRICT",
+      "state": "reference-balance-hold",
+      "gameplayAuthority": "ARCANA-54",
+      "presentationAuthority": "HOLOFOIL",
+      "identityAuthority": "AGENTIC-ENTITY",
+      "evidence": {
+        "arcana54Compatibility": "COMPATIBLE_WITH_ADAPTER",
+        "mirroredSimulation": "complete",
+        "adversarialBoundary": "pass",
+        "independentVerity": "pending",
+        "fairnessGate": "blocked"
+      },
+      "next": "complete fairness retest and independent VERITY"
+    },
+    {
+      "gameId": "hood-terps-tcg",
+      "displayName": "HOOD TERPS TCG",
+      "lane": "robinhood-chain",
+      "repository": "AGENTROPOLIS-CITY-OF-AGENTS/HOOD-TERPS",
+      "state": "integration-ready",
+      "gameplayAuthority": "HOOD-TERPS TCG",
+      "presentationAuthority": "HOLOFOIL",
+      "identityAuthority": "AGENTIC-ENTITY",
+      "observed": [
+        "TCG engine at /play",
+        "Quick Clash v0.1 rules",
+        "wallet/mint/payment disabled",
+        "existing HOLOFOIL proof binding"
+      ],
+      "next": "create game integration manifest and evidence thresholds"
+    },
+    {
+      "gameId": "penguin-arcade-tcg",
+      "displayName": "PENGUIN ARCADE TCG",
+      "lane": "robinhood-chain",
+      "repository": "wiredchaos/penguinarcade",
+      "state": "binding-required",
+      "gameplayAuthority": "PENGUIN native TCG engine",
+      "presentationAuthority": "HOLOFOIL",
+      "identityAuthority": "AGENTIC-ENTITY",
+      "observed": [
+        "native TCG engine",
+        "validatePlay gate",
+        "append-only TCGEventLedger",
+        "token-agnostic CardRegistry",
+        "TCG engine tests"
+      ],
+      "next": "bind repository to Robinhood Chain lane and create Evergreen manifest"
+    },
+    {
+      "gameId": "boardforge-arena",
+      "displayName": "BoardForge Arena",
+      "lane": "arc",
+      "state": "arc-agentic-candidate",
+      "identityAuthority": "AGENTIC-ENTITY",
+      "settlementAdapter": "AGENTROPOLIS-ARC",
+      "next": "verify repo/runtime and declare agentic evidence metrics"
+    },
+    {
+      "gameId": "c0-intel-protocol",
+      "displayName": "C0 Intel Protocol",
+      "lane": "arc",
+      "state": "arc-agentic-candidate",
+      "identityAuthority": "AGENTIC-ENTITY",
+      "settlementAdapter": "AGENTROPOLIS-ARC",
+      "next": "verify repo/runtime and declare agentic evidence metrics"
+    },
+    {
+      "gameId": "gxaf",
+      "displayName": "GXAF",
+      "lane": "arc",
+      "state": "arc-agentic-candidate",
+      "identityAuthority": "AGENTIC-ENTITY",
+      "settlementAdapter": "AGENTROPOLIS-ARC",
+      "next": "verify repo/runtime and declare agentic evidence metrics"
+    }
+  ]
+}
