@@ -1,0 +1,19 @@
+{
+  "canary": {
+    "name": "holofoil-testnet-canary",
+    "environment": "TESTNET",
+    "chain": {
+      "name": "Robinhood Chain Testnet",
+      "chainId": 46630
+    },
+    "projectId": "hood-terps",
+    "collectionId": "hood-terps:collection",
+    "quantity": 1,
+    "recipient": "PLACEHOLDER_TESTNET_RECIPIENT",
+    "contract": "PLACEHOLDER_TESTNET_CONTRACT",
+    "gasEstimate": "PLACEHOLDER_GAS_ESTIMATE",
+    "deployerKeyEnvVar": "HOLOFOIL_TESTNET_DEPLOYER_KEY",
+    "recipe": "holofoil.beta.hood-terps.genesis-033.v1",
+    "productionMint": false
+  }
+}
