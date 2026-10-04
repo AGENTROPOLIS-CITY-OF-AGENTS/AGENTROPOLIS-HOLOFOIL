@@ -33,13 +33,29 @@ export interface HolofoilProvenance {
   authorityStatus?: "VERIFIED" | "PENDING" | "BLOCKED" | "UNKNOWN";
 }
 
+export type HolofoilSurfacePreset =
+  | "standard"
+  | "skew"
+  | "prism"
+  | "glass"
+  | "relic"
+  | "holo";
+
 export interface HolofoilMaterialConfig {
-  preset?: string;
+  preset?: HolofoilSurfacePreset;
   intensity?: number;
   refraction?: number;
   shimmer?: number;
   foilDepth?: number;
   accent?: string;
+
+  /** Optional presentation-only surface controls. */
+  accentA?: string;
+  accentB?: string;
+  glow?: number;
+  blur?: number;
+  skewDeg?: number;
+  glassOpacity?: number;
 }
 
 export interface HolofoilCardData {
