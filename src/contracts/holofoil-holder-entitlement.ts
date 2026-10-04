@@ -1,25 +1,29 @@
-export type ClaimChain = "EVM" | "SOLANA" | "XRPL" | "OTHER";
-export type ClaimMode = "PER_HOLDER" | "PER_TOKEN" | "PER_WALLET" | "PROJECT_RULE";
+export type ClaimMode = "PER_HOLDER" | "PER_DISCORD_USER" | "PROJECT_RULE";
 export type ClaimStatus = "PENDING" | "VERIFIED" | "CLAIMED" | "DENIED" | "REVOKED";
 
 export interface HolofoilHolderEntitlement {
   claimId: string;
   projectId: string;
   gameId: string;
-  chain: ClaimChain;
-  network?: string;
-  collectionId: string;
-  tokenId?: string | null;
-  walletAddress: string;
-  walletProofId: string;
+
+  discordUserId: string;
+  discordGuildId: string;
+  requiredRoleIds: string[];
+
   mode: ClaimMode;
   cardObjectId: string;
   claimLimit: number;
   transferableInGame?: boolean;
-  ownershipVerified: boolean;
-  verificationMethod: "SERVER_CHAIN_QUERY" | "INDEXER_QUERY" | "SIGNED_ATTESTATION";
+
+  membershipVerified: boolean;
+  roleVerified: boolean;
+  verificationMethod:
+    | "DISCORD_OAUTH_GUILD_ROLE"
+    | "DISCORD_BOT_GUILD_ROLE"
+    | "SIGNED_PROJECT_ATTESTATION";
   verificationReference: string;
   verifiedAt: string;
+
   status: ClaimStatus;
   receiptId?: string | null;
   claimedAt?: string | null;
@@ -29,15 +33,18 @@ export interface HolderClaimResolver {
   resolveEntitlement(input: {
     projectId: string;
     gameId: string;
-    walletAddress: string;
-    tokenId?: string | null;
+    discordUserId: string;
   }): Promise<HolofoilHolderEntitlement>;
 }
 
 /**
- * HOLOFOIL never treats browser-provided ownership as truth.
- * Entitlements must be resolved by an approved server-side verifier.
+ * HOLOFOIL never trusts client-supplied roles.
+ * Eligibility must come from an approved server-side Discord/project verifier.
  */
 export function isClaimRenderable(entitlement: HolofoilHolderEntitlement) {
-  return entitlement.ownershipVerified && ["VERIFIED", "CLAIMED"].includes(entitlement.status);
+  return (
+    entitlement.membershipVerified &&
+    entitlement.roleVerified &&
+    ["VERIFIED", "CLAIMED"].includes(entitlement.status)
+  );
 }
