@@ -92,3 +92,36 @@ A game imports the shared card contract and deck shell, then supplies card data 
 Game-specific art and mechanics MAY differ.
 
 The HOLOFOIL shell, navigation semantics, accessibility, and authority boundary MUST remain stable.
+
+
+## Surface preset library
+
+HOLOFOIL separates deck navigation from card-surface material treatment.
+
+Canonical surface presets:
+
+- `standard`: neutral collectible surface
+- `skew`: angled gradient/glass showcase surface derived from the shared skew-card pattern
+- `prism`: stronger spectral presentation
+- `glass`: restrained translucent surface
+- `relic`: warm artifact/relic presentation
+- `holo`: high-energy holographic surface
+
+Games MAY select different presets per card without forking the deck shell.
+
+Example:
+
+```tsx
+<HolofoilDeck
+  cards={cards}
+  renderCard={(card, state) => (
+    <HolofoilSurface
+      card={card}
+      active={state.active}
+      preset={card.holofoil?.preset ?? "standard"}
+    />
+  )}
+/>
+```
+
+The surface preset is presentation-only. It MUST NOT determine rarity, ownership, rewards, stats, rank, or economic authority.
