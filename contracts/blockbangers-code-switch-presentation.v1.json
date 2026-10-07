@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameId": "blockbangers",
+  "system": "CODE_SWITCH",
+  "authority": {
+    "sourceState": "ARCANA-54",
+    "identity": "AGENTIC-ENTITY",
+    "presentation": "AGENTROPOLIS-HOLOFOIL"
+  },
+  "continuity": {
+    "entityIdStable": true,
+    "dnaStable": true,
+    "crtHeadIdentityStable": true,
+    "bodyIdentityStable": true,
+    "presentationMayChange": ["wardrobe","posture","environment","tools","credentials","team_context","infrastructure_context"]
+  },
+  "states": {
+    "STREET":{"visual":"streetwear, block environment, raw tools, grounded stance","signal":"raw capability"},
+    "HUSTLE":{"visual":"same identity with phone, laptop, side-work kit, early network cues","signal":"skill becomes repeatable work"},
+    "CREW":{"visual":"same identity with collaborators, crew coordination surfaces and shared mission context","signal":"organized execution"},
+    "OPERATOR":{"visual":"same identity with dashboards, permissions, wallets, automation and receipt surfaces","signal":"system operation"},
+    "ENTREPRENEUR":{"visual":"same identity in branded business workspace with client, invoicing and CRM context","signal":"business operation"},
+    "FOUNDER":{"visual":"same identity with owned product, service or IP, team context and shipped-output evidence","signal":"venture ownership"},
+    "EXECUTIVE":{"visual":"same identity directing delegated operations, analytics, governance and partnerships","signal":"multi-role authority"},
+    "BOARDROOM":{"visual":"same identity at infrastructure command level with portfolios, agents, systems and governance surfaces","signal":"infrastructure governance"}
+  },
+  "forbidden": [
+    "PROMOTE_STATE_FROM_APPEARANCE",
+    "CHANGE_ENTITY_ID",
+    "RANDOMIZE_CHARACTER_IDENTITY",
+    "INFER_LEGAL_OR_FINANCIAL_STATUS",
+    "TREAT_SUIT_AS_EXECUTIVE_EVIDENCE",
+    "ERASE_BLOCKBANGERS_VISUAL_DNA"
+  ]
+}
