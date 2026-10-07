@@ -19,7 +19,23 @@
         "independentVerity": "pending",
         "fairnessGate": "blocked"
       },
-      "next": "complete fairness retest and independent VERITY"
+      "next": "complete fairness retest and independent VERITY",
+      "codeSwitch": {
+        "stateAuthority": "ARCANA-54",
+        "sharedProgressionAuthority": "AGENTROPOLIS-GAMING-DISTRICT",
+        "presentationContract": "contracts/blockbangers-code-switch-presentation.v1.json",
+        "states": [
+          "STREET",
+          "HUSTLE",
+          "CREW",
+          "OPERATOR",
+          "ENTREPRENEUR",
+          "FOUNDER",
+          "EXECUTIVE",
+          "BOARDROOM"
+        ],
+        "rule": "presentation-follows-committed-state"
+      }
     },
     {
       "gameId": "hood-terps-tcg",
