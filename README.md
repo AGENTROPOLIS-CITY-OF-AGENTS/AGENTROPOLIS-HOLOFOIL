@@ -42,3 +42,22 @@ All game-facing integrations SHOULD use the reusable HOLOFOIL Evergreen Game Int
 This keeps HOLOFOIL presentation reusable across BLOCKBANGERS, HOOD TERPS, PENGUIN ARCADE TCG, ARC agentic games, and future games without copying one game's mechanics into another.
 
 **Core law:** presentation follows committed game truth; game-specific evidence gates control promotion.
+
+
+## Canonical HOLOFOIL deck template
+
+All game-facing collectible experiences SHOULD consume the shared HOLOFOIL presentation shell:
+
+- `src/components/deck/HolofoilDeck.tsx`
+- `src/contracts/holofoil-card.ts`
+- `docs/HOLOFOIL-DECK-TEMPLATE.md`
+
+Shared modes:
+
+`FAN -> STACK -> GRID -> LIST -> INSPECT`
+
+The consuming game remains authoritative for gameplay, rarity truth, ownership truth, rewards, ranking, economy, and receipts.
+
+HOLOFOIL owns the presentation shell and material behavior.
+
+> **One collectible grammar. Many games. No authority drift.**

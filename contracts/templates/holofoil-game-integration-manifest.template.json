@@ -22,7 +22,20 @@
   "presentation": {
     "materialSchema": "agentropolis.holofoil.material.v1",
     "deterministic": true,
-    "committedStateOnly": true
+    "committedStateOnly": true,
+    "deckTemplate": {
+      "component": "HolofoilDeck",
+      "defaultLayout": "fan",
+      "layouts": [
+        "fan",
+        "stack",
+        "grid",
+        "list",
+        "inspect"
+      ],
+      "maxVisible": 7,
+      "sharedShellRequired": true
+    }
   },
   "evidence": {
     "metrics": [

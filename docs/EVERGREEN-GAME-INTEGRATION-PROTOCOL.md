@@ -207,3 +207,30 @@ Per game:
 BLOCKBANGERS becomes the first reusable reference for this protocol.
 
 HOOD TERPS, PENGUIN ARCADE TCG, ARC agentic games, and future Gaming District games should implement the same integration contract with game-specific thresholds rather than cloning BLOCKBANGERS-specific logic.
+
+
+## Canonical collectible shell
+
+Game-facing collectible surfaces SHOULD consume the shared `HolofoilDeck` template documented in:
+
+- `docs/HOLOFOIL-DECK-TEMPLATE.md`
+- `src/components/deck/HolofoilDeck.tsx`
+- `src/contracts/holofoil-card.ts`
+
+Canonical view modes:
+
+```text
+FAN
+STACK
+GRID
+LIST
+INSPECT
+```
+
+`FAN` is the default signature presentation with up to seven visible cards.
+
+Games provide art, authoritative stats, rarity truth, ownership truth, receipts, and gameplay state. HOLOFOIL provides the shared presentation shell, material behavior, navigation, responsive behavior, and accessibility.
+
+A consuming game MAY provide a custom inner-card renderer, but MUST NOT replace the shared authority boundary or silently fork the deck interaction semantics.
+
+**Shared shell != shared game mechanics.**
